@@ -1,6 +1,6 @@
 from io import open
 from setuptools import setup
-from niftools_sphinx_theme import __version__
+from yummy_sphinx_theme import __version__
 from sphinx.setup_command import BuildDoc
 
 setup(

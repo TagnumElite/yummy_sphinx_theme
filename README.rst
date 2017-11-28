@@ -7,7 +7,7 @@ Yummy Sphinx Theme
 .. image:: https://img.shields.io/pypi/v/yummy_sphinx_theme.svg
     :target: https://pypi.org/project/yummy_sphinx_theme/
 
-.. image:: https://img.shields.io/github/release/TagnumElite/yummy_sphinx_theme.svg
+.. image:: https://img.shields.io/github/release/TagnumElite/yummy_sphinx_theme/all.svg
     :target: https://github.com/TagnumElite/yummy_sphinx_theme
 
 .. image:: https://img.shields.io/pypi/l/yummy_sphinx_theme.svg
@@ -17,7 +17,7 @@ Yummy Sphinx Theme
     :target: https://pypi.org/project/yummy_sphinx_theme/
 
 .. image:: https://img.shields.io/github/issues-raw/TagnumElite/yummy_sphinx_theme.svg
-    :target: https://github.com/TagnumElite/niftools_sphinx_theme
+    :target: https://github.com/TagnumElite/yummy_sphinx_theme
 
 .. image:: https://img.shields.io/travis/TagnumElite/yummy_sphinx_theme/develop.svg
     :target: https://travis-ci.org/niftools/TagnumElite/yummy_sphinx_theme
