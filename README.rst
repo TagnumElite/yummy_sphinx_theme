@@ -1,8 +1,7 @@
-.. _demo: http://tagnumelite.elitekast.com/yummy_sphinx_theme
 
-*********************
+==================
 Yummy Sphinx Theme
-*********************
+==================
 
 .. image:: https://img.shields.io/pypi/v/yummy_sphinx_theme.svg
     :target: https://pypi.org/project/yummy_sphinx_theme/
@@ -24,12 +23,12 @@ Yummy Sphinx Theme
 
 .. contents::
 
-Demo_
-=====
+`Demo <http://tagnumelite.elitekast.com/yummy_sphinx_theme>`_
+=============================================================
 
 Installation
 ============
-There are two ways to install this theme
+There are two ways to install these themes
 
 Via Python Package Interface
 ----------------------------
@@ -50,7 +49,7 @@ Via git or download
 -------------------
 
 Download the ``yummy_sphinx_theme`` folder into your documentation at
-``docs/_themes/`` then add the following two settings to your Sphinx
+``docs/_themes/`` then add the following two lines to your Sphinx
 ``conf.py`` file:
 
 .. code:: python
@@ -79,4 +78,12 @@ For example:
 If `home` is not specified in the theme_options it turns into the documentation home.
 If `home` is specified then there is a new option called Documentation on the navbar.
 
-.. include:: CHANGELOG.rst
+=========
+Changelog
+=========
+Releases:
+=========
+0.0.1:
+------
+* Turn jekyll theme into sphinx theme
+* Renamed project from niftools_sphinx_theme to yummy_sphinx_theme
