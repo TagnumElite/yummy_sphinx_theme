@@ -1,0 +1,271 @@
+{% macro script() %}
+
+    <!-- JS -->
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '{{ url_root }}',
+        VERSION:     '{{ release|e }}',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '{{ '' if no_search_suffix else file_suffix }}',
+        HAS_SOURCE:  {{ has_source|lower }},
+        SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
+      };
+    </script>
+    {%- for scriptfile in script_files %}
+    <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
+    {%- endfor %}
+    <script type="text/javascript" src="{{ pathto('_static/bootstrap/dist/js/bootstrap.min.js', 1) }}"></script>
+    <script type="text/javascript" src="{{ pathto('_static/js/script.js', 1) }}"></script>
+    <script type="text/javascript" src="{{ pathto('_static/geopattern/js/geopattern.min.js', 1) }}"></script>
+    <script src="{{ pathto('_static/bootstrap-toc/dist/bootstrap-toc.min.js', 1) }}"></script>
+
+            <!-- Third-Party JS -->
+            <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
+
+            <!-- My JS -->
+            <script type="text/javascript" src="/assets/js/script.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.geopattern').each(function(){
+                var pattern = GeoPattern.generate($(this).data('pattern-id'));
+                $(this).css('background-image', pattern.toDataUrl());
+                //$(this).geopattern($(this).data('pattern-id'));
+            });
+        });
+    </script>
+
+{% endmacro %}
+
+{% macro css() %}
+
+    <!-- CSS -->
+    {% for css in css_files %}
+      {% if css|attr("rel") %}
+    <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
+      {% else %}
+    <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
+      {% endif %}
+    {% endfor %}
+
+    {% for css in extra_css_files %}
+      {% if css|attr("rel") %}
+    <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
+      {% else %}
+    <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
+      {% endif %}
+    {% endfor %}
+
+    <link rel="stylesheet" href="{{ pathto('_static/octicons/octicons/octicons.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/bootstrap/dist/css/bootstrap.min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/hover/css/hover-min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/primer-markdown/dist/user-content.min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/css/syntax.css', 1) }}">
+
+    <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/bootstrap-toc/dist/bootstrap-toc.min.css', 1) }}">
+
+{% endmacro %}
+
+{% macro relbar() %}
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>{{ _('Navigation') }}</h3>
+      <ul>
+        {% for rellink in rellinks %}
+        <li class="right" {% if loop.first %}style="margin-right: 10px"{% endif %}>
+          <a href="{{ pathto(rellink[0]) }}" title="{{ rellink[1]|striptags|e }}"
+             {{ accesskey(rellink[2]) }}>{{ rellink[3] }}</a>
+          {% if not loop.first %}{{ reldelim2 }}{% endif %}</li>
+        {% endfor %}
+        {% block rootrellink %}
+        <li class="nav-item nav-item-0"><a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>{{ reldelim1 }}</li>
+        {% endblock %}
+        {% for parent in parents %}
+          <li class="nav-item nav-item-{{ loop.index }}"><a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>{{ reldelim1 }}</li>
+        {% endfor %}
+        {% block relbaritems %} {% endblock %}
+      </ul>
+    </div>
+{% endmacro %}
+
+{% macro sidebar() %}
+      {% if render_sidebar %}
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+          {% block sidebarlogo %}
+          {% if logo %}
+            <p class="logo"><a href="{{ pathto(master_doc) }}">
+              <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
+            </a></p>
+          {% endif %}
+          {% endblock %}
+          {% if sidebars != None %}
+            {# new style sidebar: explicitly include/exclude templates #}
+            {% for sidebartemplate in sidebars %}
+            {% include sidebartemplate %}
+            {% endfor %}
+          {% else %}
+            {# old style sidebars: using blocks -- should be deprecated #}
+            {% block sidebartoc %}
+            {% include "localtoc.html" %}
+            {% endblock %}
+            {% block sidebarrel %}
+            {% include "relations.html" %}
+            {% endblock %}
+            {% block sidebarsourcelink %}
+            {% include "sourcelink.html" %}
+            {% endblock %}
+            {% if customsidebar %}
+            {% include customsidebar %}
+            {% endif %}
+            {% block sidebarsearch %}
+            {% include "searchbox.html" %}
+            {% endblock %}
+          {% endif %}
+        </div>
+      </div>
+      {%- endif %}
+{% endmacro %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="{{ encoding }}">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+        {{ metatags }}
+        
+        <!-- Favicon Icon -->
+        {% if favicon %}
+        <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
+        {% endif %}
+
+        {% block htmltitle %}
+        <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+        {% endblock %}
+       
+        {{ css() }}
+
+        {% if theme_canonical_url %}
+        <link rel="canonical" href="{{ theme_canonical_url }}{{ pagename }}.html"/>
+        {% endif %}
+
+        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
+
+        <!-- Third-Party CSS -->
+        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
+        <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
+        <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
+        <link rel="stylesheet" href="/assets/css/syntax.css">
+
+        <!-- My CSS -->
+        <link rel="stylesheet" href="/assets/css/common.css">
+
+        <!-- CSS set in page -->
+        {% for css in page.css %}
+        <link rel="stylesheet" href="/assets/css/{{css}}">
+        {% endfor %}
+
+        <!-- CSS set in layout -->
+        {% for css in layout.css %}
+        <link rel="stylesheet" href="/assets/css/{{css}}">
+        {% endfor %}
+
+        <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        
+        {% block linktags %}
+        <!-- About Linktag -->
+        {% if hasdoc('about') %}
+        <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+        {% elif theme_about %}
+        <link rel="author" title="{{ _('About these documents') }}" href="{{ theme_about }}" />
+        {% endif %}
+        <!-- Genindex Linktag -->
+        {% if hasdoc('genindex') %}
+        <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+        {% endif %}
+        <!-- Search Linktag -->
+        {% if hasdoc('search') %}
+        <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+        {% endif %}
+        <!-- Copyright Linktag -->
+        {% if hasdoc('copyright') %}
+        <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+        {% endif %}
+        <!-- Next Linktag -->
+        {% if next %}
+        <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
+        {% endif %}
+        <!-- Previous Linktag -->
+        {% if prev %}
+        <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
+        {% endif %}
+        {% endblock %}
+        
+        {% block extrahead %}{% endblock %}
+    </head>
+    <body>
+        {% block header %}
+        <header class="site-header">
+            <div class="container">
+                <a id="site-header-brand" href="/" title="{{ site.name }}">
+                    <span class="octicon octicon-mark-github"></span> {{ site.name }}
+                </a>
+                <nav class="site-header-nav" role="navigation">
+                {% for nav in site.navs %}
+                    <a href="{{ nav.href }}" class="{% if page.menu == nav.label %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
+               target="{{ nav.target | default: _self }}"
+               title="{{ nav.label }}">
+                        {{ nav.label }}
+                    </a>
+                {% endfor %}
+                </nav>
+            </div>
+        </header>
+        {% endblock %}
+        {% block relbar1 %}{{ relbar() }}{% endblock %}
+        {% block footer %}
+        <footer class="container">
+            <div class="site-footer">
+                <div class="copyright pull-left">
+                    {% if hasdoc('copyright') %}
+                    {% trans path=pathto('copyright'), copyright=copyright|e %}&#169; <a href="{{ path }}"> Copyright</a> {{ copyright }}.{% endtrans %}
+                    {% else %}
+                    {% trans copyright=copyright|e %}&#169; Copyright {{ copyright }}.{% endtrans %}
+                    {% endif %}
+                </div>
+                
+                <a href="https://github.com/DONGChuan" target="_blank" aria-label="view source code">
+                    <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+                </a>
+                
+                {% if show_sphinx %}
+                <div class="sphinx pull-right">
+                {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}{% endtrans %}
+                </div>
+                {% endif %}
+            </div>
+
+            {% if theme_google_tracking_id %}
+            <!-- Google Analytics -->
+            <div style="display:none">
+                <script>
+                    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+                    ga('create', '{{ theme_google_tracking_id }}', 'auto');
+                    ga('send', 'pageview');
+                </script>
+            </div>
+            {% endif %}
+        </footer>
+        {% endblock %}
+        {% block scripts %}
+        {{ script() }}
+        {% endblock %}
+    </body>

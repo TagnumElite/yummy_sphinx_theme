@@ -1,0 +1,35 @@
+language: python
+sudo: false
+python:
+  - 2.7
+  - 3.4
+  - 3.5
+  - 3.6
+
+install:
+  - pip install sphinx
+  - python setup.py install
+
+script:
+  - python setup.py sdist bdist_wheel
+  - python setup.py build_docs
+
+notifications:
+    email: false
+
+deploy:
+  - provider: pages
+    skip_cleanup: true
+    github_token: $github_token
+    local_dir: build/sphinx/html
+    on:
+      branch: develop
+      repo: TagnumElite/yummy_sphinx_theme
+      python: 3.6
+  - provider: pypi
+    user: $pypi_username
+    password: $pypi_password
+    on:
+      branch: master
+      python: 3.6
+      repo: TagnumElite/yummy_sphinx_theme

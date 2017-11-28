@@ -99,3 +99,13 @@ ENV/
 
 # mypy
 .mypy_cache/
+/niftools.github.io/
+/sphinx_bootstrap_theme/
+/sphinx_rtd_theme/
+/_includes/
+/_layouts/
+/_posts/
+/_sass/
+/assets/
+/js/
+/sass/
