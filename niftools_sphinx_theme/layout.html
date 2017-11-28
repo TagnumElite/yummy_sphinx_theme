@@ -1,0 +1,344 @@
+{% macro script() %}
+
+    <!-- JS -->
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '{{ url_root }}',
+        VERSION:     '{{ release|e }}',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '{{ '' if no_search_suffix else file_suffix }}',
+        HAS_SOURCE:  {{ has_source|lower }},
+        SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
+      };
+    </script>
+    {%- for scriptfile in script_files %}
+    <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
+    {%- endfor %}
+    <script type="text/javascript" src="{{ pathto('_static/bootstrap/dist/js/bootstrap.min.js', 1) }}"></script>
+    <script type="text/javascript" src="{{ pathto('_static/js/script.js', 1) }}"></script>
+    <script type="text/javascript" src="{{ pathto('_static/geopattern/js/geopattern.min.js', 1) }}"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('.geopattern').each(function(){
+                var pattern = GeoPattern.generate($(this).data('pattern-id'));
+                $(this).css('background-image', pattern.toDataUrl());
+                //$(this).geopattern($(this).data('pattern-id'));
+            });
+        });
+    </script>
+
+{% endmacro %}
+
+{% macro css() %}
+
+    <!-- CSS -->
+    {% for css in css_files %}
+      {% if css|attr("rel") %}
+    <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
+      {% else %}
+    <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
+      {% endif %}
+    {% endfor %}
+
+    {% for css in extra_css_files %}
+      {% if css|attr("rel") %}
+    <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
+      {% else %}
+    <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
+      {% endif %}
+    {% endfor %}
+
+    <link rel="stylesheet" href="{{ pathto('_static/octicons/octicons/octicons.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/bootstrap/dist/css/bootstrap.min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/hover/css/hover-min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/primer-markdown/dist/user-content.min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/css/syntax.css', 1) }}">
+
+    <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+
+{% endmacro %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    {%- if use_meta_charset or html5_doctype %}
+    <meta charset="{{ encoding }}" />
+    {%- else %}
+    <meta http-equiv="Content-Type" content="text/html; charset={{ encoding }}" />
+    {%- endif %}
+    {%- if not html5_doctype %}
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    {%- endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {{ metatags }}
+
+    {%- block htmltitle %}
+    <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
+    {%- endblock %}
+
+    {% if not embedded %}
+    {% if use_opensearch %}
+    <link rel="search" type="application/opensearchdescription+xml"
+          title="{% trans docstitle=docstitle|e %}Search within {{ docstitle }}{% endtrans %}"
+          href="{{ pathto('_static/opensearch.xml', 1) }}"/>
+    {% endif %}
+    {% if favicon %}
+    <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
+    {% endif %}
+    {% endif %}
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Roboto+Condensed|Source+Sans+Pro" rel="stylesheet">
+
+    {{ css() }}
+
+    {% block linktags %}
+    {% if hasdoc('about') %}
+    <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
+    {% elif theme_about %}
+    <link rel="author" title="{{ _('About these documents') }}" href="{{ theme_about }}" />
+    {% endif %}
+    {% if hasdoc('genindex') %}
+    <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
+    {% endif %}
+    {% if hasdoc('search') %}
+    <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
+    {% endif %}
+    {% if hasdoc('copyright') %}
+    <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
+    {% endif %}
+    {% if next %}
+    <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
+    {% endif %}
+    {% if prev %}
+    <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
+    {% endif %}
+    {% endblock %}
+
+    {%- block extrahead %} {% endblock %}
+</head>
+<body data-spy="scroll" data-target="#toc" data-offset="180">
+    {% block header %}
+    <header class="site-header">
+    <div class="container">
+        <nav class="navbar ">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#site-navbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                    <a id="site-header-brand" href="{{ pathto('', 1) }}" title="{{ project }}">
+                        {{ '<img src="%s" />'% pathto('_static/'+ logo, 1) if logo }} {{ project }}
+                    </a>
+                </div>
+
+                <div id="site-navbar" class="collapse navbar-collapse" role="navigation">
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if theme_home %}
+                        <li><a href="{{ theme_home }}" class=" site-header-nav-item hvr-underline-from-center" target="" title="Home">
+                        Home
+                        </a></li>
+                        {% else %}
+                        <li><a href="{{ pathto('', 1) }}" class=" site-header-nav-item hvr-underline-from-center" target="" title="Home">
+                        Home
+                        </a></li>
+                        {% endif %}
+                        {% if theme_projects %}
+                        <li><a href="{{ theme_projects }}" class=" site-header-nav-item hvr-underline-from-center" target="" title="Our Projects">
+                        Our Projects
+                        </a></li>
+                        {% endif %}
+                        {% if theme_blog %}
+                        <li><a href="{{ theme_blog }}" class="site-header-nav-item hvr-underline-from-center" target="" title="Blog">
+                        Blog
+                        </a></li>
+                        {% endif %}
+                        {% if theme_home %}
+                        <li><a href="{{ pathto('', 1) }}" class=" selected  site-header-nav-item hvr-underline-from-center" target="" title="Documentation">
+                        Documentation
+                        </a></li>
+                        {% endif %}
+                        {% if theme_forums %}
+                        <li><a href="{{ theme_forums }}" class=" site-header-nav-item hvr-underline-from-center" target="" title="Forums">
+                        Forums
+                        </a></li>
+                        {% endif %}
+                        {% if hasdoc('about') %}
+                        <li><a href="{{ pathto('about', 1) }}" class="site-header-nav-item hvr-underline-from-center" target="" title="About">
+                        About
+                        </a></li>
+                        {% elif theme_about %}
+                        <li><a href="{{ theme_about }}" class="site-header-nav-item hvr-underline-from-center" target="" title="About">
+                        About
+                        </a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    </header>
+    {% endblock %}
+    <div class="content">
+        <section class="jumbotron geopattern" data-pattern-id="{{ title|striptags|e }}">
+            <div class="container">
+                <div id="jumbotron-meta-info">
+                    <h1>{{ project }} Documentation</h1>
+                    <span class="meta-info">
+                        <span class="mega-octicon octicon-repo"></span>&nbsp;&nbsp;{{ title|striptags|e }}
+                    </span>
+                </div>
+            </div>
+        </section>
+        <article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="row">
+                <div class="col-md-2 toc-bar">
+                {% block sidebar1 %}
+                <nav id='toc'>
+                    <!--<span class="octicon octicon-list-unordered"></span>-->
+                    <h3><a href="{{ pathto(master_doc) }}">{{ _('Table Of Contents')}}</a></h3>
+                    {% if global_toc %}
+                    {{ global_toc }}
+                    {% else %}
+                    {{ toc }}
+                    {% endif %}
+                </nav>
+                {% endblock %}
+                {% if theme_badges %}
+                {% block badges %}
+                <nav id='toc'>
+                <!--<span class="octicon octicon-browser"></span>--><h3>Badges</h3>
+                <ul>
+                {% if theme_travis %}
+                <li>Travis:</li>
+                <a href="https://travis-ci.org/{{ theme_travis }}">
+                <img src="https://img.shields.io/travis/{{ theme_travis }}.svg" alt="Travis">
+                </a>
+                <br>
+                {% endif %}
+                {% if theme_appveyor %}
+                <li>Appveyor:</li>
+                <a href="https://ci.appveyor.com/project/{{ theme_appveyor }}">
+                <img src="https://img.shields.io/appveyor/ci/{{ theme_appveyor }}.svg" alt="Appveyor">
+                </a>
+                <br>
+                {% endif %}
+                {% if theme_jenkins %}
+                <li>Jenkins:</li>
+                <a href="{{ theme_jenkins }}">
+                <img src="https://img.shields.io/jenkins/s/{{ theme_jenkins }}.svg" alt="Jenkins">
+                </a>
+                <br>
+                {% endif %}
+                {% if theme_coveralls %}
+                <li>Coveralls:</li>
+                <a href="https://coveralls.io/{{ theme_coveralls }}">
+                <img src="https://img.shields.io/coveralls/{{ theme_coveralls }}.svg" alt="Documentation Coverage">
+                </a>
+                {% endif %}
+                {% if theme_github %}
+                <li>Github:</li>
+                <a href="https://github.com/{{ theme_github }}">
+                <img src="https://img.shields.io/github/release/{{ theme_github }}.svg" alt="GitHub Release"><br>
+                <img src="https://img.shields.io/github/forks/{{ theme_github }}.svg?style=social&label=Forks" alt="Forks"><br>
+                <img src="https://img.shields.io/github/stars/{{ theme_github }}.svg?style=social&label=Stars" alt="Stars"><br>
+                <img src="https://img.shields.io/github/watchers/{{ theme_github }}.svg?style=social&label=Watch" alt="Watchers"><br>
+                </a>
+                {% endif %}
+                {% if theme_pypi %}
+                <li>PyPi:</li>
+                <a href="https://pypi.python.org/pypi/{{ theme_pypi }}">
+                <img src="https://img.shields.io/pypi/v/{{ theme_pypi }}.svg" alt="PyPi Version"><br>
+                <img src="https://img.shields.io/pypi/pyversions/{{ theme_pypi }}.svg" alt="Python Versions"><br>
+                <img src="https://img.shields.io/pypi/status/{{ theme_pypi }}.svg" alt="Development Status"><br>
+                </a>
+                {% endif %}
+                {% if theme_rtd and not READTHEDOCS %}
+                <li>Read The Docs:</li>
+                <a href="{{ theme_rtd }}.rtfd.io">
+                <img src="https://readthedocs.org/projects/{{ theme_rtd }}/badge/" alt="Documentation Status">
+                </a>
+                {% endif %}
+                {% if theme_twitter %}
+                <li>Twitter:</li>
+                <a href="https://twitter.com/{{ theme_twitter }}">
+                <img src="https://img.shields.io/twitter/follow/{{ theme_twitter }}.svg?style=social&label=Follow" alt="Follow us on Twitter">
+                </a>
+                {% endif %}
+                {% if theme_discord_id and theme_discord_invite %}
+                <li>Discord:</li>
+                <a href="{{ theme_discord_invite }}">
+                <img src="https://img.shields.io/discord/{{ theme_discord_id }}.svg" alt="Chat with us on discord!">
+                </a>
+                <br>
+                {% endif %}
+                </ul>
+                </nav>
+                {% endblock %}
+                {% endif %}
+                </div>
+                <div class="col-md-10">
+                {%- block content %}
+                    <div class="document">
+                        {%- block document %}
+                        <div class="documentwrapper">
+                            {# %- if render_sidebar % #}
+                            <div class="bodywrapper">
+                            {# %- endif % #}
+                            <div class="body" role="main">
+                            {% block body %} {% endblock %}
+                            </div>
+                            {# %- if render_sidebar % #}
+                            </div>
+                          {# %- endif % #}
+                        </div>
+                        {%- endblock %}
+                        {%- block sidebar2 %}{# Sidebar 2 #}{% endblock %}
+                        <div class="clearer"></div>
+                    </div>
+                {%- endblock %}
+                </div>
+            </div>
+        </article>
+    </div>
+    {% block footer %}
+    <footer class="container">
+        <div class="site-footer">
+            {% if show_copyright %}
+            <div class="copyright pull-left">
+                {% if hasdoc('copyright') %}
+                    {% trans path=pathto('copyright'), copyright=copyright|e %}&#169; <a href="{{ path }}"> Copyright</a> {{ copyright }}.{% endtrans %}
+                {% else %}
+                    {% trans copyright=copyright|e %}&#169; Copyright {{ copyright }}.{% endtrans %}
+                {% endif %}
+                <!-- 请不要更改这一行 方便其他人知道模板的来源 谢谢 -->
+                <!-- Please keep this line to let others know where this theme comes from. Thank you :D -->
+                <!--Powered by <a href="https://github.com/DONGChuan/Yummy-Jekyll">Yummy Jekyll</a> -->
+            </div>
+            {% endif %}
+
+            <!--
+            <a href="javascript:window.scrollTo(0,0)">
+                <span class="mega-octicon octicon-arrow-up">
+                </span>
+            </a>
+            -->
+
+            {% if show_sphinx %}
+            <div class="sphinx pull-right">
+                {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}{% endtrans %}
+            </div>
+            {% endif %}
+        </div>
+    </footer>
+    {% endblock %}
+
+    {% block scripts %}
+    {{ script() }}
+    {% endblock %}
+</body>
+</html>
