@@ -13,7 +13,7 @@ before_install:
   - sudo npm install -g bower
 
 install:
-  - sudo bower install
+  - bower install
   - sudo pip install sphinx
   - sudo python setup.py install
 
