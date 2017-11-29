@@ -1,12 +1,19 @@
 language: python
-sudo: false
+dist: trusty
+sudo: true
 python:
   - 2.7
   - 3.4
   - 3.5
   - 3.6
 
+before_install:
+  - sudo apt-get install nodejs
+  - sudo apt-get install npm
+  - npm install -g bower
+
 install:
+  - bower install
   - pip install sphinx
   - python setup.py install
 

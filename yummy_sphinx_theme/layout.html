@@ -1,6 +1,5 @@
 {% macro script() %}
-
-    <!-- JS -->
+    <script type="text/javascript" src="{{ pathto('_static/jquery/dist/jquery.min.js', 1) }}"></script>
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '{{ url_root }}',
@@ -14,16 +13,11 @@
     {%- for scriptfile in script_files %}
     <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
     {%- endfor %}
-    <script type="text/javascript" src="{{ pathto('_static/bootstrap/dist/js/bootstrap.min.js', 1) }}"></script>
     <script type="text/javascript" src="{{ pathto('_static/js/script.js', 1) }}"></script>
+    <script type="text/javascript" src="{{ pathto('_static/underscore/underscore-min.js', 1) }}"></script>
+    <script type="text/javascript" src="{{ pathto('_static/js/underscore-min.js', 1) }}"></script>
     <script type="text/javascript" src="{{ pathto('_static/geopattern/js/geopattern.min.js', 1) }}"></script>
-    <script src="{{ pathto('_static/bootstrap-toc/dist/bootstrap-toc.min.js', 1) }}"></script>
-
-            <!-- Third-Party JS -->
-            <script type="text/javascript" src="/bower_components/geopattern/js/geopattern.min.js"></script>
-
-            <!-- My JS -->
-            <script type="text/javascript" src="/assets/js/script.js"></script>
+    <!--<script src="https://use.fontawesome.com/0cb92b034c.js"></script>-->
 
     <script>
         $(document).ready(function(){
@@ -34,12 +28,20 @@
             });
         });
     </script>
-
 {% endmacro %}
 
 {% macro css() %}
+    <link rel="stylesheet" href="{{ pathto('_static/bootstrap/dist/css/bootstrap.min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/flag-icon-css/css/flag-icon.min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/font-awesome/css/font-awesome.min.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/hover/css/hover-min.css', 1) }}">
+    <!--<link rel="stylesheet" href="{{ pathto('_static/octicons/lib/octicons.css', 1) }}">-->
+    <!--<link rel="stylesheet" href="{{ pathto('_static/primer-markdown/lib/user-content.min.css', 1) }}">-->
+    <link rel="stylesheet" href="{{ pathto('_static/syntax.css', 1) }}">
 
-    <!-- CSS -->
+    <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
+    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
+    
     {% for css in css_files %}
       {% if css|attr("rel") %}
     <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
@@ -56,16 +58,7 @@
       {% endif %}
     {% endfor %}
 
-    <link rel="stylesheet" href="{{ pathto('_static/octicons/octicons/octicons.css', 1) }}">
-    <link rel="stylesheet" href="{{ pathto('_static/bootstrap/dist/css/bootstrap.min.css', 1) }}">
-    <link rel="stylesheet" href="{{ pathto('_static/hover/css/hover-min.css', 1) }}">
-    <link rel="stylesheet" href="{{ pathto('_static/primer-markdown/dist/user-content.min.css', 1) }}">
-    <link rel="stylesheet" href="{{ pathto('_static/css/syntax.css', 1) }}">
-
-    <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
-    <link rel="stylesheet" href="{{ pathto('_static/bootstrap-toc/dist/bootstrap-toc.min.css', 1) }}">
-
+    <script type="text/javascript" src="{{ pathto('_static/bootstrap/dist/js/bootstrap.min.js', 1) }}"></script>
 {% endmacro %}
 
 {% macro relbar() %}
@@ -152,29 +145,7 @@
         <link rel="canonical" href="{{ theme_canonical_url }}{{ pagename }}.html"/>
         {% endif %}
 
-        <script type="text/javascript" src="/bower_components/jquery/dist/jquery.min.js"></script>
-
-        <!-- Third-Party CSS -->
-        <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/bower_components/octicons/octicons/octicons.css">
-        <link rel="stylesheet" href="/bower_components/hover/css/hover-min.css">
-        <link rel="stylesheet" href="/bower_components/primer-markdown/dist/user-content.min.css">
-        <link rel="stylesheet" href="/assets/css/syntax.css">
-
-        <!-- My CSS -->
-        <link rel="stylesheet" href="/assets/css/common.css">
-
-        <!-- CSS set in page -->
-        {% for css in page.css %}
-        <link rel="stylesheet" href="/assets/css/{{css}}">
-        {% endfor %}
-
-        <!-- CSS set in layout -->
-        {% for css in layout.css %}
-        <link rel="stylesheet" href="/assets/css/{{css}}">
-        {% endfor %}
-
-        <script type="text/javascript" src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="{{ pathto('_static/jquery/jquery.min.js', 1) }}"></script>
         
         {% block linktags %}
         <!-- About Linktag -->
@@ -209,24 +180,68 @@
     </head>
     <body>
         {% block header %}
-        <header class="site-header">
+        <header class="site-header" style="background-color: {{ theme_navbar_base_color }};">
             <div class="container">
-                <a id="site-header-brand" href="/" title="{{ site.name }}">
-                    <span class="octicon octicon-mark-github"></span> {{ site.name }}
+                <a id="site-header-brand" href="/" title="{{ project }}">
+                    <i class="fa fa-github" aria-hidden="true"></i> {{ project }}
                 </a>
                 <nav class="site-header-nav" role="navigation">
-                {% for nav in site.navs %}
-                    <a href="{{ nav.href }}" class="{% if page.menu == nav.label %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
-               target="{{ nav.target | default: _self }}"
-               title="{{ nav.label }}">
-                        {{ nav.label }}
+                {% if theme_navs %}
+                {% for name, link in theme_navs.items() %}
+                    <a href="{{ link }}" class="{% if pagename == name %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
+               target="_self"
+               title="{{ name }}">
+                        {{ name }}
                     </a>
                 {% endfor %}
+                    <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
+               target="_self"
+               title="{{ project }}">
+                        {{ project }}
+                    </a>
+                {% else%}
+                    <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
+               target="_self"
+               title="{{ project }}">
+                        {{ project }}
+                    </a>
+                {% endif %}
                 </nav>
             </div>
         </header>
         {% endblock %}
-        {% block relbar1 %}{{ relbar() }}{% endblock %}
+        {% block relbar1 %}{% endblock %}
+        
+        <section class="jumbotron geopattern" data-pattern-id="{{ pagename }}">
+            <div class="container">
+                <div id="jumbotron-meta-info">
+                    <h1>{{ pagename }}</h1>
+                    <span class="meta-info">
+                        {# % if page.subtitle % #}
+                        {# { page.subtitle } #}
+                        {# % endif % #}
+                        {# % if page.date % #}
+                        <i class="fa fa-calendar" aria-hidden="true"></i> {# { page.date | date: "%Y/%m/%d" } #}
+                        {# % endif % #}
+                    </span>
+                </div>
+            </div>
+        </section>
+        {% block content %}
+        <article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+            <div class="row">
+                <div class="col-md-8 markdown-body">
+                    {% block body %}{% endblock %}
+                    <!-- Comments -->
+                    {% include "disqus-comments.html" %}
+                </div>
+                <div class="col-md-4">
+                    {# % include sidebar-nav.html % #}
+                </div>
+            </div>
+        </article>
+        {% endblock %}
+        
         {% block footer %}
         <footer class="container">
             <div class="site-footer">
@@ -237,14 +252,24 @@
                     {% trans copyright=copyright|e %}&#169; Copyright {{ copyright }}.{% endtrans %}
                     {% endif %}
                 </div>
-                
-                <a href="https://github.com/DONGChuan" target="_blank" aria-label="view source code">
-                    <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+                {% if theme_github_url %}
+                <a href="https://github.com/{{ github_url }}" target="_blank" aria-label="view source code">
+                    <i class="fa fa-github" title="GitHub"></i>
                 </a>
-                
+                {% elif theme_bitbucket_url %}
+                <a href="https://bitbucket.com/{{ theme_bitbucket_url }}" target="_blank" aria-label="view source code">
+                    <i class="fa fa-bitbucket" title="BitBucket" aria-hidden="true"></i>
+                </a>
+                {% elif theme_gitlab_url %}
+                <a href="https://gitlab/{{ theme_gitlab_url }}" target="_blank" aria-label="view source code">
+                    <i class="fa fa-gitlab" title="GitLab" aria-hidden="true"></i>
+                </a>
+                {% endif %}
                 {% if show_sphinx %}
                 <div class="sphinx pull-right">
-                {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}{% endtrans %}
+                    {% trans sphinx_version=sphinx_version|e %}
+                    Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}
+                    {% endtrans %}
                 </div>
                 {% endif %}
             </div>
@@ -269,3 +294,4 @@
         {{ script() }}
         {% endblock %}
     </body>
+</html>

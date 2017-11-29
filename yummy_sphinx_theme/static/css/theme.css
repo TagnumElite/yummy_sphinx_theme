@@ -41,7 +41,7 @@
 }
 
 #site-header-brand,
-#site-header-brand .octicon {
+#site-header-brand .fa {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 38px;
@@ -84,7 +84,7 @@
 /** Jumbotron **/
 
 .jumbotron {
-    padding-top: 200px;
+    padding-top: 200px !important;
     padding-bottom: 100px;
     color: #fff;
 }
@@ -105,7 +105,7 @@
 }
 
 .jumbotron.meta-info,
-.jumbotron .meta-info .octicon {
+.jumbotron .meta-info .fa {
     font-size: 18px;
 }
 
@@ -121,13 +121,14 @@
     border-top: 2px solid #eee
 }
 
-.site-footer .octicon-mark-github {
+.site-footer .fa {
     position: absolute;
     left: 50%;
     color: #ccc;
+    font-size: 32px;
 }
 
-.site-footer .octicon-mark-github:hover {
+.site-footer .fa:hover {
     color: #bbb;
 }
 
@@ -159,7 +160,7 @@
 }
 
 .post-list-meta,
-.post-list-meta.octicon {
+.post-list-meta .fa {
     font-size: 18px;
 }
 
@@ -170,39 +171,4 @@
 
 .sidebar-title {
     text-align: center;
-}
-
-/** Only for index.html **/
-
-.site-header {
-    color: #fff;
-    background: #4183c4;
-}
-
-.site-header #site-header-brand {
-    color: #fff;
-}
-
-.site-header .site-header-nav-item {
-    color: #9acfea;
-}
-
-.site-header a:hover {
-    color: #fff;
-}
-
-.jumbotron {
-    background: #4183c4;
-}
-
-.site-header.site-header-nav-scrolled a {
-    color: #2e2e2e;
-}
-
-.site-header.site-header-nav-scrolled #site-header-brand {
-    color: #2e2e2e !important;
-}
-
-.site-header.site-header-nav-scrolled a:hover {
-    color: #4183c4;
 }

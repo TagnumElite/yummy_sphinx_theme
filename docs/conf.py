@@ -97,9 +97,13 @@ html_theme_path = [os.path.join(os.path.dirname(os.path.dirname(__file__)))]
 # documentation.
 #
 html_theme_options = {
-    'home': 'https://github.com/TagnumElite/yummy_sphinx_theme',
+    'navs': {
+        'Home': 'http://tagnumelite.elitekast.com'
+    },
     'github_url': 'TagnumElite/yummy_sphinx_theme',
-    'google_tracking_id': 'UA-49499868-10'
+    'google_tracking_id': 'UA-49499868-10',
+    'navbar_base_color': '#ffffff',
+    'disqus': 'yummysphinxtheme'
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
