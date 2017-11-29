@@ -10,16 +10,16 @@ python:
 before_install:
   - sudo apt-get install nodejs
   - sudo apt-get install npm
-  - npm install -g bower
+  - sudo npm install -g bower
 
 install:
-  - bower install
-  - pip install sphinx
-  - python setup.py install
+  - sudo bower install
+  - sudo pip install sphinx
+  - sudo python setup.py install
 
 script:
-  - python setup.py sdist bdist_wheel
-  - python setup.py build_docs
+  - sudo python setup.py sdist bdist_wheel
+  - sudo python setup.py build_docs
 
 notifications:
     email: false
