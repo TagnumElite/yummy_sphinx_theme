@@ -10,28 +10,6 @@ recursive-include yummy_sphinx_theme *.ttf
 recursive-include yummy_sphinx_theme *.woff
 recursive-include yummy_sphinx_theme *.woff2
 
-recursive-exclude yummy_sphinx_theme *.json
-recursive-exclude yummy_sphinx_theme *.md
-recursive-exclude yummy_sphinx_theme Gemfile*
-recursive-exclude yummy_sphinx_theme Gruntfile.js
-recursive-exclude yummy_sphinx_theme LICENSE
-recursive-exclude yummy_sphinx_theme package.js
-recursive-exclude yummy_sphinx_theme package.json
-recursive-exclude yummy_sphinx_theme package.js
-recursive-exclude yummy_sphinx_theme *.less
-recursive-exclude yummy_sphinx_theme .gitignore
-recursive-exclude yummy_sphinx_theme *.nuspec
-recursive-exclude yummy_sphinx_theme *.ps1
-recursive-exclude yummy_sphinx_theme composer.json
-recursive-exclude yummy_sphinx_theme *.scss
-recursive-exclude yummy_sphinx_theme .npmignore
-recursive-exclude yummy_sphinx_theme *.txt
-recursive-exclude yummy_sphinx_theme .eslintrc
-recursive-exclude yummy_sphinx_theme geopattern.html
-recursive-exclude yummy_sphinx_theme gulpfile.js
-recursive-exclude yummy_sphinx_theme .travis.yml
-recursive-exclude yummy_sphinx_theme .stylelintrc.json
-
 recursive-include niftools_sphinx_theme *.conf
 recursive-include niftools_sphinx_theme *.css
 recursive-include niftools_sphinx_theme *.eot

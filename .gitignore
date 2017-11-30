@@ -8,6 +8,3 @@
 /dist/
 npm-debug.log
 */__pycache__/
-/yummy_sphinx_theme/static/*
-!/yummy_sphinx_theme/static/js/*
-!/yummy_sphinx_theme/static/css/*

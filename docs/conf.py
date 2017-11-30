@@ -103,7 +103,8 @@ html_theme_options = {
     'github_url': 'TagnumElite/yummy_sphinx_theme',
     'google_tracking_id': 'UA-49499868-10',
     'navbar_base_color': '#ffffff',
-    'disqus': 'yummysphinxtheme'
+    'disqus': 'yummysphinxtheme',
+    'canonical_url': "http://tagnumelite.elitekast.com/yummy_sphinx_theme"
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,

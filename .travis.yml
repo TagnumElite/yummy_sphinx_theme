@@ -7,19 +7,13 @@ python:
   - 3.5
   - 3.6
 
-before_install:
-  - sudo apt-get install nodejs
-  - sudo apt-get install npm
-  - sudo npm install -g bower
-
 install:
-  - bower install
   - sudo pip install sphinx
   - sudo python setup.py install
 
 script:
   - sudo python setup.py sdist bdist_wheel
-  - sudo python setup.py build_docs
+  - sudo python setup.py build_docs -a
 
 notifications:
     email: false
