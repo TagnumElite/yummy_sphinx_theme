@@ -59,24 +59,8 @@ Download the ``yummy_sphinx_theme`` folder into your documentation at
 
 Configuration
 =============
-
-The theme's project-wide options are defined in the ``yummy_sphinx_theme/theme.conf``
-file of this repository, and can be defined in your project's ``conf.py`` via
-``html_theme_options``.
-
-For example:
-
-.. code:: python
-
-    html_theme_options = {
-        'home': 'https://github.com/TagnumElite',
-        'projects': 'https://github.com/TagnumElite/?tab=repositories',
-        'blog': 'https://tagnumelite.elitekast.com',
-        'forums': 'https://forums.example.com'
-    }
-
-If `home` is not specified in the theme_options it turns into the documentation home.
-If `home` is specified then there is a new option called Documentation on the navbar.
+* `yummy_sphinx_theme <http://tagnumelite.elitekast.com/yummy_sphinx_theme/themes/yummy_sphinx_theme.html#configuration>`_
+* `niftools_sphinx_theme <http://tagnumelite.elitekast.com/yummy_sphinx_theme/themes/niftools_sphinx_theme.html#configuration>`_
 
 =========
 Changelog
@@ -84,6 +68,11 @@ Changelog
 
 Yummy
 =====
+
+0.0.3:
+------
+* More color customization
+* `Customizable navbar icon <http://fontawesome.io/icons/>`_
 
 0.0.2:
 ------

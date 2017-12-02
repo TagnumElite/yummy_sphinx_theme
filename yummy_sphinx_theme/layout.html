@@ -184,10 +184,10 @@
     </head>
     <body>
         {% block header %}
-        <header class="site-header" style="background-color: {{ theme_navbar_base_color }};">
+        <header class="site-header">
             <div class="container">
                 <a id="site-header-brand" href="/" title="{{ project }}">
-                    <i class="fa fa-github" aria-hidden="true"></i> {{ project }}
+                    <i class="fa fa-{{ theme_navbar_icon }}" aria-hidden="true"></i> {{ project }}
                 </a>
                 <nav class="site-header-nav" role="navigation">
                 {% if theme_navs %}
@@ -267,19 +267,21 @@
                     {% trans copyright=copyright|e %}&#169; Copyright {{ copyright }}.{% endtrans %}
                     {% endif %}
                 </div>
-                {% if theme_github_url %}
-                <a href="https://github.com/{{ github_url }}" target="_blank" aria-label="view source code">
-                    <i class="fa fa-github" title="GitHub"></i>
-                </a>
-                {% elif theme_bitbucket_url %}
-                <a href="https://bitbucket.com/{{ theme_bitbucket_url }}" target="_blank" aria-label="view source code">
-                    <i class="fa fa-bitbucket" title="BitBucket" aria-hidden="true"></i>
-                </a>
-                {% elif theme_gitlab_url %}
-                <a href="https://gitlab/{{ theme_gitlab_url }}" target="_blank" aria-label="view source code">
-                    <i class="fa fa-gitlab" title="GitLab" aria-hidden="true"></i>
-                </a>
-                {% endif %}
+                <div class="source_code">
+                    {% if theme_github_url %}
+                    <a href="https://github.com/{{ github_url }}" target="_blank" aria-label="view source code">
+                        <i class="fa fa-github" title="GitHub"></i>
+                    </a>
+                    {% elif theme_bitbucket_url %}
+                    <a href="https://bitbucket.com/{{ theme_bitbucket_url }}" target="_blank" aria-label="view source code">
+                        <i class="fa fa-bitbucket" title="BitBucket" aria-hidden="true"></i>
+                    </a>
+                    {% elif theme_gitlab_url %}
+                    <a href="https://gitlab/{{ theme_gitlab_url }}" target="_blank" aria-label="view source code">
+                        <i class="fa fa-gitlab" title="GitLab" aria-hidden="true"></i>
+                    </a>
+                    {% endif %}
+                </div>
                 {% if show_sphinx %}
                 <div class="sphinx pull-right">
                     {% trans sphinx_version=sphinx_version|e %}

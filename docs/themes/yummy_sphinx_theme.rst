@@ -10,10 +10,15 @@ Configuration
 Navagation
 ^^^^^^^^^^
 * ``navs``: :py:class:`dict`. `A dictionary of nav links`
+* ``navbar_icon``: :py:class:`str`. ` `A font-awesone icon <http://fontawesome.io/icons/>`_ `
 
 .. note::
-    If you leave navs alone it will create a link with you projects
+    If you leave navs alone it will create a link with your project's
     name on their to the home page.
+
+Custom Styles
+^^^^^^^^^^^^^
+* ``font_awesome_embed_code``: :py:class:`str`. `A font-awesome embed code (0cb92b034c.js)`
 
 Urls
 ^^^^
@@ -27,13 +32,24 @@ Urls
     ``github_url``, ``bitbucket_url`` or ``gitlab_url`` will result
     in a each respective icon in the footer.
 
-Tracking
-^^^^^^^^
+Analytics
+^^^^^^^^^
 * ``google_tracking_id``: :py:class:`str`. `Google Analytics Code`
 
 Colors
 ^^^^^^
-* ``navbar_base_color``: :py:class:`str`. ` `HTML Color code <https://www.w3schools.com/colors/default.asp>`_ `
+* Navbar
+    * ``navbar_bg_color``: :py:class:`str`. ` `HTML color code`_ `
+    * ``navbar_text_color``: :py:class:`str`. ` `HTML color code`_ `
+    * ``navbar_brand_color``: :py:class:`str`. ` `HTML color code`_ `
+    * ``navbar_hover_color``: :py:class:`str`. ` `HTML color code`_ `
+* Jumbotron
+    * ``jumbotron_text_color``: :py:class:`str`. ` `HTML color code`_ `
+    * ``jumbotron_link_color``: :py:class:`str`. ` `HTML color code`_ `
+* Footer
+    * ``footer_text_color``: :py:class:`str`. ` `HTML color code`_ `
+    * ``footer_icon_color``: :py:class:`str`. ` `HTML color code`_ `
+    * ``footer_icon_hover_color``: :py:class:`str`. ` `HTML color code`_ `
 
 Example
 ^^^^^^^
@@ -50,6 +66,8 @@ Example
         'bitbucket_url': 'TagnumElite/yummy_sphinx_theme',
         'gitlab_url': 'TagnumElite/yummy_sphinx_theme'
     }
+
+.. _HTML color code: https://www.w3schools.com/colors/default.asp
 
 Indices and tables
 ------------------
