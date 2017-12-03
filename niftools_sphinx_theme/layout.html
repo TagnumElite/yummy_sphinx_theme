@@ -321,12 +321,17 @@
             </div>
             {% endif %}
 
-            <!--
-            <a href="javascript:window.scrollTo(0,0)">
-                <span class="mega-octicon octicon-arrow-up">
-                </span>
-            </a>
-            -->
+            <div class="pull-middle">
+                {% if theme_github %}
+                <a href="https://github.com/{{ theme_github }}" target="_blank" aria-label="{{ project }} on GitHub">
+                    <span class="mega-octicon octicon-mark-github" title="GitHub"></span>
+                </a>
+                {% else %}
+                <a href="javascript:window.scrollTo(0,10)">
+                    <span class="mega-octicon octicon-arrow-up"></span>
+                </a>
+                {% endif %}
+            </div>
 
             {% if show_sphinx %}
             <div class="sphinx pull-right">

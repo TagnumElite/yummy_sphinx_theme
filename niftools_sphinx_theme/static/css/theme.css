@@ -4,7 +4,7 @@
 
 #site-header-brand,
 .jumbotron,
-.navbar-nav>li,
+.navbar-nav > li,
 .post-list-item,
 .sidebar-title,
 .sidebar-title-left,
@@ -85,7 +85,7 @@
     word-wrap: break-word;
 }
 
-.navbar-inverse .navbar-nav>li>a {
+.navbar-inverse .navbar-nav > li > a {
     color: #dedede;
 }
 
@@ -375,7 +375,7 @@ ul.flex-list li header span {
     text-shadow: 0px 0px 10px rgba(51, 51, 51, 0.5), 0px 0px 5px #333333, 0px 0px 3px #282828, 0px 0px 2px rgba(30, 30, 30, 0.7);
 }
 
-ul.flex-list li>.content {
+ul.flex-list li > .content {
     font-size: 159px;
     line-height: 159px;
     color: rgba(255, 255, 255, 0.2);
@@ -442,10 +442,10 @@ ul.flex-list li footer {
         float: none !important;
         margin-top: 7.5px;
     }
-    .navbar-nav>li {
+    .navbar-nav > li {
         float: none;
     }
-    .navbar-nav>li>a {
+    .navbar-nav > li > a {
         padding-top: 10px;
         padding-bottom: 10px;
     }
@@ -525,14 +525,19 @@ div .admonition > p .admonition-title {
     font-style: italic;
 }
 
-.site-footer > a .mega-octicon {
+.site-footer > .sphinx {
+    font-style: italic;
+}
+
+.site-footer > .pull-middle {
+    position: absolute;
+    left: 50%;
+}
+
+.site-footer > .pull-middle a .mega-octicon {
     color: #cecece;
 }
 
-.site-footer > a:hover .mega-octicon {
-    color: #00ffff;
-}
-
-.site-footer > .sphinx {
-    font-style: italic;
+.site-footer > .pull-middle a:hover .mega-octicon {
+    color: #bebebe;
 }

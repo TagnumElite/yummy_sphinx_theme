@@ -38,6 +38,9 @@ Badges
 * ``pypi``: :py:class:`str`. `PROJECT`
 * ``rtd``: :py:class:`str`. `PROJECT`
 
+.. note::
+    ``github`` option will change what icon appears at the bottom of the footer
+
 Tracking
 --------
 * ``analytics``: :py:class:`str`. `Google Analytics Code`

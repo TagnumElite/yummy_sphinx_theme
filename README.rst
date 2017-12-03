@@ -100,6 +100,8 @@ Niftools
 ------
 * Add Dedicated Documentation Page
 * Added Bootstrap
+* Add a middle footer
+* Beautify CSS
 
 0.0.7:
 ------

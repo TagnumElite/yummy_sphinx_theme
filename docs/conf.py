@@ -184,6 +184,3 @@ texinfo_documents = [
      author, 'yummy_sphinx_theme', 'One line description of project.',
      'Miscellaneous'),
 ]
-
-
-
