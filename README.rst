@@ -19,7 +19,7 @@ Yummy Sphinx Theme
     :target: https://github.com/TagnumElite/yummy_sphinx_theme
 
 .. image:: https://img.shields.io/travis/TagnumElite/yummy_sphinx_theme/develop.svg
-    :target: https://travis-ci.org/niftools/TagnumElite/yummy_sphinx_theme
+    :target: https://travis-ci.org/TagnumElite/yummy_sphinx_theme
 
 .. contents::
 
