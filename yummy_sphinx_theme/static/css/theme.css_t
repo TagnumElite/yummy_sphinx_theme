@@ -121,6 +121,10 @@
     border-top: 2px solid #eee
 }
 
+.source_code {
+
+}
+
 .site-footer .fa {
     position: absolute;
     left: 50%;
@@ -130,10 +134,6 @@
 
 .site-footer .fa:hover {
     color: {{ theme_footer_icon_hover_color }};
-}
-
-.source_code {
-    
 }
 
 /** Post List **/

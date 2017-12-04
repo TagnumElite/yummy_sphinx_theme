@@ -214,8 +214,6 @@
             </div>
         </header>
         {% endblock %}
-        {% block relbar1 %}{% endblock %}
-        
         <section class="jumbotron geopattern" data-pattern-id="{{ pagename }}">
             <div class="container">
                 <div id="jumbotron-meta-info">
@@ -256,7 +254,6 @@
             </div>
         </article>
         {% endblock %}
-        
         {% block footer %}
         <footer class="container">
             <div class="site-footer">
@@ -280,6 +277,10 @@
                     <a href="https://gitlab/{{ theme_gitlab_url }}" target="_blank" aria-label="view source code">
                         <i class="fa fa-gitlab" title="GitLab" aria-hidden="true"></i>
                     </a>
+                    {% else %}
+                    <a href="javascript:window.scrollTo(20,20)">
+                        <i class="fa fa-arrow-up" title="To The Top" aria-hidden="true"></i>
+                    </a>
                     {% endif %}
                 </div>
                 {% if show_sphinx %}
@@ -290,7 +291,6 @@
                 </div>
                 {% endif %}
             </div>
-
             {% if theme_google_tracking_id %}
             <!-- Google Analytics -->
             <div style="display:none">
