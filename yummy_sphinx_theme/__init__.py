@@ -3,7 +3,7 @@ Yummy Sphinx Theme, created to mimick the niftools.org website
 """
 from os import path
 
-__version__ = '0.0.3'
+__version__ = '0.0.4'
 
 def get_path():
     """Return list of HTML theme paths."""

@@ -121,9 +121,7 @@
     border-top: 2px solid #eee
 }
 
-.source_code {
-
-}
+.source_code {}
 
 .site-footer .fa {
     position: absolute;
@@ -179,11 +177,32 @@
 
 /** Sidebar Navigation **/
 
-div .toc {
+div #toc {
     font-size: 14px;
-    background: #fff;
+    background: {{ theme_toc_bg_color }};
     box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
     width: 300px;
+}
+
+#toc li {
+    border-left: 5px solid {{ theme_toc_hover_color }};
+    cursor: pointer;
+    padding: 2px 5px 2px 15px;
+    list-style-type: none;
+}
+
+#toc a {
+    text-decoration: none;
+}
+
+#toc li:hover {
+    background: {{ theme_toc_hover_color }};
+    border-left: 5px solid #111;
+}
+
+#toc li:hover a {
+    font-weight: bold;
+    color: {{ theme_toc_text_color }};
 }
 
 .col-md-4 {

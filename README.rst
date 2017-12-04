@@ -69,6 +69,12 @@ Changelog
 Yummy
 =====
 
+0.0.4:
+------
+* Default Footer Icon
+* Fix Table Of Contents
+* Customizable Table Of Contents
+
 0.0.3:
 ------
 * More color customization
