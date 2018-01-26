@@ -135,6 +135,9 @@
         <meta charset="{{ encoding }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="title" content="{{ project }}">
+        <meta name="version" content="{{ version }}">
+        <meta name="copyright" content="{{ copyright }}">
         
         {{ metatags }}
         
@@ -156,30 +159,31 @@
         {% endif %}
         
         {% block linktags %}
-        <!-- About Linktag -->
         {% if hasdoc('about') %}
+        <!-- About Linktag -->
         <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
         {% elif theme_about %}
+        <!-- About Linktag -->
         <link rel="author" title="{{ _('About these documents') }}" href="{{ theme_about }}" />
         {% endif %}
-        <!-- Genindex Linktag -->
         {% if hasdoc('genindex') %}
+        <!-- Genindex Linktag -->
         <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
         {% endif %}
-        <!-- Search Linktag -->
         {% if hasdoc('search') %}
+        <!-- Search Linktag -->
         <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
         {% endif %}
-        <!-- Copyright Linktag -->
         {% if hasdoc('copyright') %}
+        <!-- Copyright Linktag -->
         <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
         {% endif %}
-        <!-- Next Linktag -->
         {% if next %}
+        <!-- Next Linktag -->
         <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
         {% endif %}
-        <!-- Previous Linktag -->
         {% if prev %}
+        <!-- Previous Linktag -->
         <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
         {% endif %}
         {% endblock %}
@@ -266,7 +270,7 @@
                 </div>
                 <div class="source_code">
                     {% if theme_github_url %}
-                    <a href="https://github.com/{{ github_url }}" target="_blank" aria-label="view source code">
+                    <a href="https://github.com/{{ theme_github_url }}" target="_blank" aria-label="view source code">
                         <i class="fa fa-github" title="GitHub"></i>
                     </a>
                     {% elif theme_bitbucket_url %}
