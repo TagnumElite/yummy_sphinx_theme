@@ -69,6 +69,11 @@ Changelog
 Yummy
 =====
 
+0.0.5:
+------
+* Fix Theme Problems
+* Update Docs
+
 0.0.4:
 ------
 * Default Footer Icon
