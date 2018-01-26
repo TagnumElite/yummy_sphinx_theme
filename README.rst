@@ -69,6 +69,14 @@ Changelog
 Yummy
 =====
 
+0.0.6:
+------
+* Fix theme.css_t problem
+* Add Home Name Config
+* Remove Unwanted File
+* Fix Version 0.0.5
+* Add versions footholder
+
 0.0.5:
 ------
 * Fix Theme Problems

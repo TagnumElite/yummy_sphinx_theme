@@ -1,13 +1,14 @@
-* {
+﻿* {
     margin: 0;
     padding: 0;
-    font-family: Microsoft YaHei,"Helvetica Neue",Helvetica,"Segoe UI",Arial,freesans,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+    font-family: Microsoft YaHei, "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 }
 
 /** Header **/
-.site-header{
-    padding-top:20px;
-    padding-bottom:20px;
+
+.site-header {
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 100%;
     position: fixed;
     margin: 40px 0 30px 0;
@@ -16,8 +17,8 @@
     right: 0;
     z-index: 103;
 
-    color: #000;
-    background: #fff;
+    color: {{ theme_navbar_text_color }};
+    background: {{ theme_navbar_bg_color }};
 
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
@@ -27,7 +28,7 @@
 }
 
 .site-header #site-header-brand {
-    color: #2e2e2e;
+    color: {{ theme_navbar_brand_color }};
     float: left;
 }
 
@@ -36,10 +37,11 @@
 }
 
 .site-header a:hover {
-    color: #4183c4;
+    color: {{ theme_navbar_hover_color }};
 }
 
-#site-header-brand, #site-header-brand .octicon {
+#site-header-brand,
+#site-header-brand .fa {
     margin-top: 0;
     margin-bottom: 0;
     font-size: 38px;
@@ -47,22 +49,23 @@
     line-height: 38px;
 }
 
-.site-header-nav{
-    float:right;
+.site-header-nav {
+    float: right;
     margin-bottom: -20px;
 }
 
 .site-header-nav-item {
-    color: #000;
-    display:inline-block;
-    padding:10px;
-    margin-left:1.25rem;
+    color: {{ theme_navbar_text_color }};
+    display: inline-block;
+    padding: 10px;
+    margin-left: 1.25rem;
     font-size: 20px;
 }
 
 /******* Scroll Start *******/
+
 .site-header {
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .site-header.site-header-nav-scrolled {
@@ -75,72 +78,64 @@
     -o-box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
     box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
 }
-/******* Scroll End *******/
 
-/******* Scroll Start on the phone *******/
-.site-header {
-    box-shadow: 0 0 5px rgba(0,0,0,0.1);
-}
-
-.site-header.site-header-nav-scrolled-ph {
-    margin-top: -160px;
-
-    -webkit-box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
-    -moz-box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
-    -ms-box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
-    -o-box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
-    box-shadow: 0 0.125em 0.125em 0 rgba(0, 0, 0, 0.125);
-}
 /******* Scroll End *******/
 
 /** Jumbotron **/
+
 .jumbotron {
-    padding-top: 200px;
+    padding-top: 200px !important;
     padding-bottom: 100px;
-    color: #fff;
+    color: {{ theme_jumbotron_text_color }};
 }
 
 .jumbotron a {
-    color: #fff;
+    color: {{ theme_jumbotron_link_color }};
     text-decoration: none;
 }
+
 .jumbotron #jumbotron-meta-info {
     margin-top: 20px;
+    ;
 }
 
 .jumbotron .meta-info {
     font-size: 20px;
-    margin-right: 15px;
-    display: inline-block;
-    vertical-align: middle;
+    margin-right: 15px
 }
 
-.jumbotron.meta-info, .jumbotron .meta-info .octicon {
+.jumbotron.meta-info,
+.jumbotron .meta-info .fa {
     font-size: 18px;
 }
 
 /** Footer **/
-.site-footer{
-    position:relative;
-    margin-top:40px;
-    padding:40px 0;
-    font-size:12px;
-    line-height:1.5;
-    color:#777;
-    border-top:2px solid #eee
+
+.site-footer {
+    position: relative;
+    margin-top: 40px;
+    padding: 40px 0;
+    font-size: 12px;
+    line-height: 1.5;
+    color: {{ theme_footer_text_color }};
+    border-top: 2px solid #eee
 }
 
-.site-footer .octicon-mark-github {
+.source_code {}
+
+.site-footer .fa {
     position: absolute;
     left: 50%;
-    color: #ccc;
+    color: {{ theme_footer_icon_color }};
+    font-size: 32px;
 }
 
-.site-footer .octicon-mark-github:hover {
-    color:#bbb;
+.site-footer .fa:hover {
+    color: {{ theme_footer_icon_hover_color }};
 }
 
 /** Post List **/
+
 .post-list-item {
     position: relative;
     padding-top: 30px;
@@ -166,14 +161,49 @@
     color: #888;
 }
 
-.post-list-meta, .post-list-meta.octicon {
+.post-list-meta,
+.post-list-meta .fa {
     font-size: 18px;
 }
 
 .geopattern {
-    background-size: contain; /* To fix strange behavior when zoom in/out */
+    background-size: contain;
+    /* To fix strange behavior when zoom in/out */
 }
 
 .sidebar-title {
     text-align: center;
 }
+
+/** Sidebar Navigation **/
+
+div #toc {
+    font-size: 14px;
+    background: {{ theme_toc_bg_color }};
+    box-shadow: 0 2px 10px 2px rgba(0, 0, 0, 0.2);
+    width: 300px;
+}
+
+#toc li {
+    border-left: 5px solid {{ theme_toc_hover_color }};
+    cursor: pointer;
+    padding: 2px 5px 2px 15px;
+    list-style-type: none;
+}
+
+#toc a {
+    text-decoration: none;
+}
+
+#toc li:hover {
+    background: {{ theme_toc_hover_color }};
+    border-left: 5px solid #111;
+}
+
+#toc li:hover a {
+    font-weight: bold;
+    color: {{ theme_toc_text_color }};
+}
+
+.col-md-4 {
+    position: static;

@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="{{ pathto('_static/css/hover-min.css', 1) }}">
     <!--<link rel="stylesheet" href="{{ pathto('_static/octicons/lib/octicons.css', 1) }}">-->
     <!--<link rel="stylesheet" href="{{ pathto('_static/primer-markdown/lib/user-content.min.css', 1) }}">-->
-    <link rel="stylesheet" href="{{ pathto('_static/css/syntax.css', 1) }}">
+    <link rel="stylesheet" href="{{ pathto('_static/css/syntax.css', 1) }}" type="text/css" />
 
     <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
     <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
@@ -209,13 +209,13 @@
                     <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
                target="_self"
                title="{{ project }}">
-                        {{ project }}
+                        {% if theme_home_name %}{{ theme_home_name }}{% else %}{{ project }}{% endif %}
                     </a>
                 {% else%}
                     <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
                target="_self"
                title="{{ project }}">
-                        {{ project }}
+                        {% if theme_home_name %}{{ theme_home_name }}{% else %}{{ project }}{% endif %}
                     </a>
                 {% endif %}
                 </nav>

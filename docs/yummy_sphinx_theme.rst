@@ -11,6 +11,7 @@ Navagation
 ^^^^^^^^^^
 * ``navs``: :py:class:`dict`. `A dictionary of nav links`
 * ``navbar_icon``: :py:class:`str`. ` `A font-awesone icon <http://fontawesome.io/icons/>`_ `
+* ``home_name``: :py:class:`str`. `String use to customise home nav key. Default: (Documentation)`
 
 .. note::
     If you leave navs alone it will create a link with your project's
