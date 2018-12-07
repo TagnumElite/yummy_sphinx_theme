@@ -23,7 +23,7 @@ Yummy Sphinx Theme
 
 .. contents::
 
-`Demo <http://tagnumelite.elitekast.com/yummy_sphinx_theme>`_
+`Demo <http://tagnumelite.com/yummy_sphinx_theme>`_
 =============================================================
 
 Installation
@@ -59,8 +59,8 @@ Download the ``yummy_sphinx_theme`` folder into your documentation at
 
 Configuration
 =============
-* `yummy_sphinx_theme <http://tagnumelite.elitekast.com/yummy_sphinx_theme/themes/yummy_sphinx_theme.html#configuration>`_
-* `niftools_sphinx_theme <http://tagnumelite.elitekast.com/yummy_sphinx_theme/themes/niftools_sphinx_theme.html#configuration>`_
+* `yummy_sphinx_theme <http://tagnumelite.com/yummy_sphinx_theme/themes/yummy_sphinx_theme.html#configuration>`_
+* `niftools_sphinx_theme <http://tagnumelite.com/yummy_sphinx_theme/themes/niftools_sphinx_theme.html#configuration>`_
 
 =========
 Changelog
