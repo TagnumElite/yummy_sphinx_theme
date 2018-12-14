@@ -35,7 +35,7 @@ setup(
         'Framework :: Sphinx',
         'Framework :: Sphinx :: Theme',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: MIT License',
+        'License :: OSI Approved :: Apache Software License',
         'Operating System :: OS Independent',
         'Topic :: Documentation',
         'Topic :: Software Development :: Documentation',

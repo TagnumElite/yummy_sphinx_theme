@@ -21,6 +21,13 @@ Yummy Sphinx Theme
 .. image:: https://img.shields.io/travis/TagnumElite/yummy_sphinx_theme/develop.svg
     :target: https://travis-ci.org/TagnumElite/yummy_sphinx_theme
 
+The yummy_sphinx_theme is created from `DONGChuan's Yummy-Jekyll
+ <https://github.com/DONGChuan/Yummy-Jekyll>`_
+
+The niftools_sphinx_theme is a modification of the yummy_sphinx_theme for the niftools team.
+If either has a complaint with what I have made, because I did do this without any legal knowledge.
+Or proper creditation.
+
 .. contents::
 
 `Demo <http://tagnumelite.com/yummy_sphinx_theme>`_
