@@ -1,16 +1,26 @@
 {% macro script() %}
-
     <!-- JS -->
-    <script type="text/javascript">
-      var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '{{ url_root }}',
-        VERSION:     '{{ release|e }}',
-        COLLAPSE_INDEX: false,
-        FILE_SUFFIX: '{{ '' if no_search_suffix else file_suffix }}',
-        HAS_SOURCE:  {{ has_source|lower }},
-        SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}'
-      };
-    </script>
+    {% if sphinx_version >= "1.8.0" %} 
+      <script type="text/javascript" id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/documentation_options.js', 1) }}"></script> 
+      {%- for scriptfile in script_files %} 
+        {{ js_tag(scriptfile) }} 
+      {%- endfor %} 
+    {% else %} 
+      <script type="text/javascript"> 
+          var DOCUMENTATION_OPTIONS = { 
+              URL_ROOT:'{{ url_root }}', 
+              VERSION:'{{ release|e }}', 
+              LANGUAGE:'{{ language }}', 
+              COLLAPSE_INDEX:false, 
+              FILE_SUFFIX:'{{ '' if no_search_suffix else file_suffix }}', 
+              HAS_SOURCE:  {{ has_source|lower }}, 
+              SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}' 
+          }; 
+      </script> 
+      {%- for scriptfile in script_files %} 
+        <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script> 
+      {%- endfor %} 
+    {% endif %} 
     {%- for scriptfile in script_files %}
     <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
     {%- endfor %}
@@ -79,6 +89,8 @@
     <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
     {%- endblock %}
 
+    <script type="text/javascript" src="{{ pathto('_static/js/jquery.min.js', 1) }}"></script>
+
     {% if not embedded %}
     {% if use_opensearch %}
     <link rel="search" type="application/opensearchdescription+xml"
@@ -92,7 +104,9 @@
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto|Roboto+Condensed|Source+Sans+Pro" rel="stylesheet">
 
+    {% block css %}
     {{ css() }}
+    {% endblock %}
 
     {% block linktags %}
     {% if hasdoc('about') %}
@@ -117,6 +131,10 @@
     {% endif %}
     {% endblock %}
 
+    {% block scripts %}
+    {{ script() }}
+    {% endblock %}
+
     {%- block extrahead %} {% endblock %}
 </head>
 <body data-spy="scroll" data-target="#toc" data-offset="180">
@@ -138,6 +156,18 @@
 
                 <div id="site-navbar" class="collapse navbar-collapse" role="navigation">
                     <ul class="nav navbar-nav navbar-right">
+                        
+                        <!-- This is a inline searchbox in the navbar, uncomment it if you want-->
+                        <!--{% if theme_search and pagename != "search" and builder != "singlehtml" %}
+                        {% block search %}
+                        <form class="form-inline" action="{{ pathto('search')}}" method="GET">
+                            <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                            <input type="hidden" name="check_keywords" value="yes" />
+                            <input type="hidden" name="area" value="default" />
+                            <button class="btn btn-outline-success" type="submit">"{{ _('Go') }}"</button>
+                        </form>
+                        {% endblock %}
+                        {% endif %}-->
                         {% if theme_home %}
                         <li><a href="{{ theme_home }}" class=" site-header-nav-item hvr-underline-from-center" target="" title="Home">
                         Home
@@ -197,6 +227,11 @@
         <article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
             <div class="row">
                 <div class="col-md-2 toc-bar">
+                {% if theme_search %}
+                {% block sidebarsearch %}
+                {% include "searchbox.html" %}
+                {% endblock %}
+                {% endif %}
                 {% block sidebar1 %}
                 <nav id='toc'>
                     <!--<span class="octicon octicon-list-unordered"></span>-->
@@ -340,10 +375,6 @@
             {% endif %}
         </div>
     </footer>
-    {% endblock %}
-
-    {% block scripts %}
-    {{ script() }}
     {% endblock %}
 </body>
 </html>

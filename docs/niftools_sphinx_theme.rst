@@ -14,6 +14,7 @@ Navagation
 * ``blog``: :py:class:`str`. `URL to blog page`
 * ``forums``: :py:class:`str`. `URL to forums`
 * ``about``: :py:class:`str`. `URL to about page`
+* ``search``: :py:class:`bool`. `Enable search box in sidebar`
 
 .. note::
     If you don't specify home it's link will be replaced with the docs root.
