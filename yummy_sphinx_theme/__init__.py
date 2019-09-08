@@ -3,7 +3,7 @@ Yummy Sphinx Theme, created to mirror Yummy-Jekyll for sphinx
 """
 from os import path
 
-__version__ = '1.0.0'
+__version__ = '0.1.0'
 
 
 def get_path():
