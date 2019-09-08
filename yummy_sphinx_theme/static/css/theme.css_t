@@ -87,6 +87,9 @@
     padding-top: 200px !important;
     padding-bottom: 100px;
     color: {{ theme_jumbotron_text_color }};
+    {% if theme_jumbotron_background_image %}
+    background-image: url('{{ theme_jumbotron_background_image }}');
+    {% endif %}
 }
 
 .jumbotron a {

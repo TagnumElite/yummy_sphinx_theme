@@ -25,6 +25,10 @@ Navagation
 Custom Styles
 ^^^^^^^^^^^^^
 * ``font_awesome_embed_code``: :py:class:`str`. `A font-awesome embed code (0cb92b034c.js)`
+* ``jumbotron_use_geopattern``: :py:class:`bool` `Enable/Disable the geopattern`
+* ``jumbotron_background_image``: :py:class:`str` `Base64 Encoded Image` ``data:image/...`` `Base64 Encoder`_
+
+.. _Base64 Encoder: https://www.base64-image.de/
 
 TOC Tree
 ^^^^^^^^

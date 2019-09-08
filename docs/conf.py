@@ -84,7 +84,7 @@ pygments_style = 'sphinx'
 todo_include_todos = False
 
 
-# -- Options for HTML output ----------------------------------------------
+# -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
@@ -104,7 +104,6 @@ html_theme_options = {
     'google_tracking_id': 'UA-49499868-10',
     'disqus': 'yummysphinxtheme',
     'canonical_url': "http://tagnumelite.elitekast.com/yummy_sphinx_theme",
-    'navbar_icon': 'spin fa-book'
 }
 
 # Add any paths that contain custom static files (such as style sheets) here,
@@ -125,62 +124,7 @@ html_sidebars = {
         'searchbox.html',
         'donate.html',
     ]
+    'navbar_icon': 'spin fa-book',
 }
 
 html_logo = '_static/favicon.ico'
-
-# -- Options for HTMLHelp output ------------------------------------------
-
-# Output file base name for HTML help builder.
-htmlhelp_basename = 'yummy_sphinx_themedoc'
-
-
-# -- Options for LaTeX output ---------------------------------------------
-
-latex_elements = {
-    # The paper size ('letterpaper' or 'a4paper').
-    #
-    # 'papersize': 'letterpaper',
-
-    # The font size ('10pt', '11pt' or '12pt').
-    #
-    # 'pointsize': '10pt',
-
-    # Additional stuff for the LaTeX preamble.
-    #
-    # 'preamble': '',
-
-    # Latex figure (float) alignment
-    #
-    # 'figure_align': 'htbp',
-}
-
-# Grouping the document tree into LaTeX files. List of tuples
-# (source start file, target name, title,
-#  author, documentclass [howto, manual, or own class]).
-latex_documents = [
-    (master_doc, 'yummy_sphinx_theme.tex', 'yummy\\_sphinx\\_theme Documentation',
-     'TagnumElite', 'manual'),
-]
-
-
-# -- Options for manual page output ---------------------------------------
-
-# One entry per manual page. List of tuples
-# (source start file, name, description, authors, manual section).
-man_pages = [
-    (master_doc, 'yummy_sphinx_theme', 'yummy_sphinx_theme Documentation',
-     [author], 1)
-]
-
-
-# -- Options for Texinfo output -------------------------------------------
-
-# Grouping the document tree into Texinfo files. List of tuples
-# (source start file, target name, title, author,
-#  dir menu entry, description, category)
-texinfo_documents = [
-    (master_doc, 'yummy_sphinx_theme', 'yummy_sphinx_theme Documentation',
-     author, 'yummy_sphinx_theme', 'One line description of project.',
-     'Miscellaneous'),
-]
