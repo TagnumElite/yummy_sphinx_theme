@@ -11,13 +11,3 @@ recursive-include yummy_sphinx_theme *.svg
 recursive-include yummy_sphinx_theme *.ttf
 recursive-include yummy_sphinx_theme *.woff
 recursive-include yummy_sphinx_theme *.woff2
-
-recursive-include niftools_sphinx_theme *.conf
-recursive-include niftools_sphinx_theme *.css
-recursive-include niftools_sphinx_theme *.eot
-recursive-include niftools_sphinx_theme *.html
-recursive-include niftools_sphinx_theme *.js
-recursive-include niftools_sphinx_theme *.svg
-recursive-include niftools_sphinx_theme *.ttf
-recursive-include niftools_sphinx_theme *.woff
-recursive-include niftools_sphinx_theme *.woff2

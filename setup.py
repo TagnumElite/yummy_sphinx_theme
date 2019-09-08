@@ -1,28 +1,20 @@
 from io import open
 from setuptools import setup
 from yummy_sphinx_theme import __version__
-from sphinx.setup_command import BuildDoc
 
 setup(
     name='yummy_sphinx_theme',
     version=__version__,
-    description='A sphinx theme created to mimick Yummy-Jekyll',
+    description='A sphinx theme created to mirror Yummy-Jekyll',
     long_description=open('README.rst', encoding='utf-8').read(),
     author='Tagan Hoyle',
     author_email='tagnum.elite@gmail.com',
     url='https://github.com/TagnumElite/yummy_sphinx_theme',
     license='MIT',
-    packages=['yummy_sphinx_theme', 'niftools_sphinx_theme'],
+    packages=['yummy_sphinx_theme'],
     include_package_data=True,
     package_data={
         'yummy_sphinx_theme': [
-            'theme.conf',
-            '*.html',
-            'static/css/*.css',
-            'static/js/*.js',
-            'static/fonts/*.*'
-        ],
-        'niftools_sphinx_theme': [
             'theme.conf',
             '*.html',
             'static/css/*.css',
@@ -47,19 +39,7 @@ setup(
     ],
     entry_points= {
         'sphinx.html_themes': [
-            'yummy_sphinx_theme = yummy_sphinx_theme',
-            'niftools_sphinx_theme = niftools_sphinx_theme',
+            'yummy_sphinx_theme = yummy_sphinx_theme'
         ]
-    },
-    cmdclass = {
-        'build_docs': BuildDoc
-    },
-    command_options={
-        'build_docs': {
-            'project': ('setup.py', "yummy_sphinx_theme"),
-            'version': ('setup.py', __version__),
-            'release': ('setup.py', __version__),
-            'source_dir': ('setup.py', 'docs/')
-        }
-    },
+    }
 )
