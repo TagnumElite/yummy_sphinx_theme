@@ -20,8 +20,7 @@ Yummy Sphinx Theme
 .. image:: https://img.shields.io/travis/TagnumElite/yummy_sphinx_theme/develop.svg
     :target: https://travis-ci.org/TagnumElite/yummy_sphinx_theme
 
-The yummy_sphinx_theme is created from `DONGChuan's Yummy-Jekyll
- <https://github.com/DONGChuan/Yummy-Jekyll>`_
+The yummy_sphinx_theme is created from `DONGChuan's Yummy-Jekyll <https://github.com/DONGChuan/Yummy-Jekyll>`_
 
 The niftools_sphinx_theme is a modification of the yummy_sphinx_theme for the niftools team.
 If either has a complaint with what I have made, because I did do this without any legal knowledge.
@@ -63,17 +62,18 @@ Download the ``yummy_sphinx_theme`` folder into your documentation at
     html_theme = "yummy_sphinx_theme"
     html_theme_path = ["_themes", ]
 
-Configuration
-=============
-* `yummy_sphinx_theme <http://tagnumelite.com/yummy_sphinx_theme/themes/yummy_sphinx_theme.html#configuration>`_
-* `niftools_sphinx_theme <http://tagnumelite.com/yummy_sphinx_theme/themes/niftools_sphinx_theme.html#configuration>`_
-
 =========
 Changelog
 =========
 
 Yummy
 =====
+
+0.1.0:
+------
+* Remove niftools_sphinx_theme
+* Added option to disable geopattern
+* Add background image fallback for jumbotron
 
 0.0.6:
 ------
@@ -117,17 +117,3 @@ Yummy
 ------
 * Turn jekyll theme into sphinx theme
 * Renamed project from niftools_sphinx_theme to yummy_sphinx_theme
-
-Niftools
-========
-
-0.0.8:
-------
-* Add Dedicated Documentation Page
-* Added Bootstrap
-* Add a middle footer
-* Beautify CSS
-
-0.0.7:
-------
-* Disolve niftools_sphinx_theme and move it here
