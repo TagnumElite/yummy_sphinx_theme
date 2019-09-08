@@ -10,7 +10,7 @@ install:
 
 script:
   - sudo python setup.py sdist bdist_wheel
-  - sudo python setup.py build_docs -a
+  - cd docs && make html && cd ..
 
 notifications:
     email: false
