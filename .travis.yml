@@ -27,10 +27,10 @@ deploy:
       branch: develop
       repo: TagnumElite/yummy_sphinx_theme
       python: 3.6
-  - provider: pypi
-    user: $pypi_username
-    password: $pypi_password
-    on:
-      branch: master
-      python: 3.6
-      repo: TagnumElite/yummy_sphinx_theme
+  #- provider: pypi
+  #  user: $pypi_username
+  #  password: $pypi_password
+  #  on:
+  #    branch: master
+  #    python: 3.6
+  #    repo: TagnumElite/yummy_sphinx_theme
