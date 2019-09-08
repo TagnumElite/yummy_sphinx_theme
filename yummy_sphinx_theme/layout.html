@@ -28,7 +28,7 @@
     <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
     {%- endfor %}
 
-    {% if theme_jumbotron_use_geopattern %}
+    {% if theme_jumbotron_use_geopattern|tobool %}
     <script type="text/javascript" src="{{ pathto('_static/js/geopattern.min.js', 1) }}"></script>
     <script>
         $(document).ready(function(){
@@ -68,6 +68,14 @@
     <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
       {% endif %}
     {% endfor %}
+
+    {% if not theme_jumbotron_background_image.startswith('data:') %}
+    <style>
+    .jumbotron.geopattern {
+         background-image: url('{{ pathto(theme_jumbotron_background_image, 1) }}');
+         }
+    </style>
+    {% endif %}
 
     <script type="text/javascript" src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
     
