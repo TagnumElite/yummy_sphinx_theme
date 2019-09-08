@@ -19,7 +19,7 @@ deploy:
   - provider: pages
     skip_cleanup: true
     github_token: $github_token
-    local_dir: build/sphinx/html
+    local_dir: docs/_build/html
     on:
       branch: develop
       repo: TagnumElite/yummy_sphinx_theme
