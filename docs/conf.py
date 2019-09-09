@@ -68,7 +68,7 @@ master_doc = 'index'
 #
 html_theme_options = {
     'navs': {
-        'Home': 'http://tagnumelite.elitekast.com'
+        'Home': 'https://tagnumelite.com'
     },
     'github_url': 'TagnumElite/yummy_sphinx_theme',
     'google_tracking_id': 'UA-49499868-10',

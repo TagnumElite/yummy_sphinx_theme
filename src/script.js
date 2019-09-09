@@ -3,14 +3,14 @@ var windowScroll = function () {
     $(window).scroll(function () {
 
         var scrollPos = $(this).scrollTop();
-        
+
         var system ={win : false,mac : false,xll : false};
-        //¼ì²âÆ½Ì¨
+        //æ£€æµ‹å¹³å°
         var p = navigator.platform;
         system.win = p.indexOf("Win") == 0;
         system.mac = p.indexOf("Mac") == 0;
         system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
-        //ÅÐ¶ÏÆ½Ì¨ÀàÐÍ
+        //åˆ¤æ–­å¹³å°ç±»åž‹
         if(system.win||system.mac||system.xll){
             if ($(window).scrollTop() > 70)
             {
@@ -19,8 +19,8 @@ var windowScroll = function () {
                 $('.site-header').removeClass('site-header-nav-scrolled');
             }
         }else{
-            //Èç¹ûÊÇÊÖ»úÔò½«¶¥À¸ÒÆ³ý½çÃæ
-            if ($(window).scrollTop() > 40) 
+            //å¦‚æžœæ˜¯æ‰‹æœºåˆ™å°†é¡¶æ ç§»é™¤ç•Œé¢
+            if ($(window).scrollTop() > 40)
             {
                 $('.site-header').addClass('site-header-nav-scrolled-ph');
             } else {
@@ -33,3 +33,19 @@ var windowScroll = function () {
 $( document ).ready(function() {
     windowScroll();
 });
+
+var fixmeTop = $('#toc').offset().top - 100;
+
+$(window).scroll(function() {                  // assign scroll event listener
+            var currentScroll = $(window).scrollTop(); // get current position
+            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
+                $('#toc').css({      // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed'
+                });
+            } else {                                   // apply position: static
+                $('#toc').css({      // if you scroll above it
+                    position: 'inherit'
+                });
+            }
+        });

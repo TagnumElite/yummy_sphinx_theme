@@ -4,12 +4,22 @@ sudo: true
 python:
   - 3.6
 
+cache:
+  - npm
+  - pip
+
+before_install:
+  - nvm install node
+
 install:
-  - sudo pip install sphinx
+  - sudo npm ci
+  - sudo pip install --upgrade pip
+  - sudo pip install --upgrade requirements.txt
   - sudo python setup.py install
 
 script:
   - sudo python setup.py sdist bdist_wheel
+  - npm run build
   - cd docs && make html && cd ..
 
 notifications:
