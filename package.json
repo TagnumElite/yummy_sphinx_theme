@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "prettier": "prettier --write webpack.*.js src/**/*.js",
+    "dev": "webpack --config webpack.development.js",
     "build": "webpack --config webpack.production.js"
   },
   "devDependencies": {

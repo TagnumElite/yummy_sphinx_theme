@@ -4,7 +4,8 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 module.exports = {
   entry: {
     theme: "./src/index.js",
-    bootstrap: "./src/bootstrap/_bootstrap.js"
+    bootstrap: "./src/bootstrap/_bootstrap.js",
+    fontawesome: "./src/_fontawesome.js",
   },
   output: {
     filename: "js/[name].js",
