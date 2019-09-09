@@ -12,11 +12,11 @@ cache:
 
 before_install:
   - npm i -g npm
+  - sudo pip install --upgrade pip
 
 install:
   - npm ci
-  - sudo pip install --upgrade pip
-  - sudo pip install --upgrade requirements.txt
+  - sudo pip install --upgrade -r requirements.txt
   - sudo python setup.py install
 
 script:
