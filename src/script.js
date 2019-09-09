@@ -1,8 +1,20 @@
+var fixmeTop = $('#toc').offset().top - 100;
+
 // Window Scroll
 var windowScroll = function () {
-    $(window).scroll(function () {
+    $(window).scroll(function () { // assign scroll event listener
+        var scrollPos = $(this).scrollTop(); // get current position
+            if (scrollPos >= fixmeTop) { // apply position: fixed if you
+                $('#toc').css({ // scroll to that element or below it
+                    top: '100px',
+                    position: 'fixed'
+                });
+            } else {                                   // apply position: static
+                $('#toc').css({      // if you scroll above it
+                    position: 'inherit'
+                });
+            }
 
-        var scrollPos = $(this).scrollTop();
 
         var system ={win : false,mac : false,xll : false};
         //检测平台
@@ -32,20 +44,7 @@ var windowScroll = function () {
 
 $( document ).ready(function() {
     windowScroll();
+
+    // Update all headerlinks to fontawesome icons
+    $("a.headerlink").html("<i class=\"fas fa-bookmark\"></i>");
 });
-
-var fixmeTop = $('#toc').offset().top - 100;
-
-$(window).scroll(function() {                  // assign scroll event listener
-            var currentScroll = $(window).scrollTop(); // get current position
-            if (currentScroll >= fixmeTop) {           // apply position: fixed if you
-                $('#toc').css({      // scroll to that element or below it
-                    top: '100px',
-                    position: 'fixed'
-                });
-            } else {                                   // apply position: static
-                $('#toc').css({      // if you scroll above it
-                    position: 'inherit'
-                });
-            }
-        });

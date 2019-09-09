@@ -17,8 +17,7 @@ module.exports = {
     })
   ],
   externals: {
-    "popper.js": "popper.js",
-    jquery: "jQuery"
+    jquery: "jQuery",
   },
   module: {
     rules: [
