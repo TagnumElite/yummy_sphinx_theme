@@ -1,13 +1,15 @@
-//
-@import 'theme_variables';
+// Import Theme Veriables
+@import "theme_variables";
+
+// Main Theme Layout
+@import "theme_layout";
+@import "theme_syntax";
 
 // Third-Party CSS
-@import '~hover.css/scss/hover';
+@import "~hover.css/scss/hover";
 //@import '~flag-icon-css/sass/flag-icon';
-@import '~primer-markdown/index';
-@import '~normalize.css';
+@import "~primer-markdown/index";
+@import "~normalize.css";
 
-//
-@import 'theme_layout';
-@import 'theme_syntax';
-@import 'theme_sphinx';
+// Sphinx related CSS
+@import "theme_sphinx";
