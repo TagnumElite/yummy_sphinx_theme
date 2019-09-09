@@ -5,7 +5,7 @@ module.exports = {
   entry: {
     theme: "./src/index.js",
     bootstrap: "./src/bootstrap/_bootstrap.js",
-    fontawesome: "./src/_fontawesome.js",
+    fontawesome: "./src/_fontawesome.js"
   },
   output: {
     filename: "js/[name].js",
@@ -17,7 +17,7 @@ module.exports = {
     })
   ],
   externals: {
-    jquery: "jQuery",
+    jquery: "jQuery"
   },
   module: {
     rules: [
@@ -34,7 +34,7 @@ module.exports = {
           {
             loader: "postcss-loader",
             options: {
-              ident: 'postcss',
+              ident: "postcss",
               plugins: function() {
                 return [require("precss"), require("autoprefixer")];
               }
