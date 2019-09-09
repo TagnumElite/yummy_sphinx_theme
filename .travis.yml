@@ -13,7 +13,7 @@ before_install:
   - nvm use node
 
 install:
-  - sudo npm ci
+  - npm ci
   - sudo pip install --upgrade pip
   - sudo pip install --upgrade requirements.txt
   - sudo python setup.py install
