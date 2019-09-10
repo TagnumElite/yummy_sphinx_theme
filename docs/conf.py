@@ -70,7 +70,9 @@ html_theme_options = {
     'navs': {
         'Home': 'https://tagnumelite.com'
     },
-    'github_url': 'TagnumElite/yummy_sphinx_theme',
+    'service': 'GitHub',
+    'user': 'TagnumElite',
+    'repo': 'yummy_sphinx_theme',
     'google_tracking_id': 'UA-49499868-10',
     'disqus': 'yummysphinxtheme',
     'canonical_url': "http://tagnumelite.elitekast.com/yummy_sphinx_theme",

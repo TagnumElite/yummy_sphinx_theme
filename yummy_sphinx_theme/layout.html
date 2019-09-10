@@ -1,339 +1,205 @@
-{% macro script() %}
-    {% if sphinx_version >= "1.8.0" %} 
-    <script type="text/javascript" id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/documentation_options.js', 1) }}"></script> 
-    {%- for scriptfile in script_files %} 
-    {{ js_tag(scriptfile) }} 
-    {%- endfor %} 
-    {% else %} 
-    <script type="text/javascript"> 
-        var DOCUMENTATION_OPTIONS = { 
-            URL_ROOT:'{{ url_root }}', 
-            VERSION:'{{ release|e }}', 
-            LANGUAGE:'{{ language }}', 
-            COLLAPSE_INDEX:false, 
-            FILE_SUFFIX:'{{ '' if no_search_suffix else file_suffix }}', 
-            HAS_SOURCE:  {{ has_source|lower }}, 
-            SOURCELINK_SUFFIX: '{{ sourcelink_suffix }}' 
-        }; 
-    </script> 
-    {%- for scriptfile in script_files %} 
-    <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script> 
-    {%- endfor %} 
-    {% endif %} 
-    <script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
-    <script type="text/javascript" src="{{ pathto('_static/js/script.js', 1) }}"></script>
-    <script type="text/javascript" src="{{ pathto('_static/js/underscore-min.js', 1) }}"></script>
-    
-    {%- for scriptfile in script_files %}
-    <script type="text/javascript" src="{{ pathto(scriptfile, 1) }}"></script>
-    {%- endfor %}
+{% extends "basic/layout.html" %}
 
-    {% if theme_jumbotron_use_geopattern|tobool %}
-    <script type="text/javascript" src="{{ pathto('_static/js/geopattern.min.js', 1) }}"></script>
-    <script>
-        $(document).ready(function(){
-            $('.geopattern').each(function(){
-                var pattern = GeoPattern.generate($(this).data('pattern-id'));
-                $(this).css('background-image', pattern.toDataUrl());
-                //$(this).geopattern($(this).data('pattern-id'));
-            });
-        });
-    </script>
-    {% endif %}
+{% block css %}
+<style>
+  :root {
+      --navbar_bg_color: {{ theme_navbar_bg_color }};
+      --navbar_text_color: {{ theme_navbar_text_color }};
+      --navbar_brand_color: {{ theme_navbar_brand_color }};
+      --navbar_hover_color: {{ theme_navbar_hover_color }};
+      --jumbotron_text_color: {{ theme_jumbotron_text_color }};
+      --jumbotron_link_color: {{ theme_jumbotron_link_color }};
+      --footer_text_color: {{ theme_footer_text_color }};
+      --footer_icon_color: {{ theme_footer_icon_color }};
+      --footer_icon_hover_color: {{ theme_footer_icon_hover_color }};
+      --toc_bg_color: {{ theme_toc_bg_color }};
+      --toc_text_color: {{ theme_toc_text_color }};
+      --toc_hover_color: {{ theme_toc_hover_color }};
+  }
+
+  {% if theme_jumbotron_background_image %}
+  {% set jumbotron_background_url = theme_jumbotron_background_image if theme_jumbotron_background_image.startswith('data:') else pathto(theme_jumbotron_background_image, 1) %}
+  .jumbotron {
+      background-image: url('{{ jumbotron_background_url }}');
+  }
+  {% endif %}
+</style>
+
+<link rel="stylesheet" href="{{ pathto('_static/css/bootstrap.css', 1) }}" type="text/css"/>
+{{ super() }}
+<link rel="stylesheet" href="{{ pathto('_static/css/custom.css', 1) }}" type="text/css"/>
+{% endblock %}
+
+{% block scripts %}{# Disable scripts block in head, instead move to below footer #}{% endblock %}
+
+{% macro scripts() %}
+<script type="text/javascript" id="documentation_options" data-url_root="{{ pathto('', 1) }}" src="{{ pathto('_static/documentation_options.js', 1) }}"></script>
+<!-- Script Files -->
+{%- for js in script_files %} {{ js_tag(js) }} {%- endfor %}
+<!-- End -->
+
+<script type="text/javascript" src="{{ pathto('_static/js/bootstrap.js', 1) }}"></script>
+<script type="text/javascript" src="{{ pathto('_static/js/theme.js', 1) }}"></script>
+<script type="text/javascript" src="{{ pathto('_static/js/custom.js', 1) }}"></script>
+
+<script>
+  {# Update all headerlinks to fontawesome icons #}
+  $("a.headerlink").html('<i class="{{ theme_headerlinks_icon }}"></i>');
+</script>
+
+{# Load fontawesome last because it is a large download #}
+<script defer type="text/javascript" src="{{ pathto('_static/js/fontawesome.js', 1) }}"></script>
 {% endmacro %}
-
-{% macro css() %}
-    <link rel="stylesheet" href="{{ pathto('_static/css/bootstrap.min.css', 1) }}">
-    <link rel="stylesheet" href="{{ pathto('_static/css/font-awesome.min.css', 1) }}">
-    <link rel="stylesheet" href="{{ pathto('_static/css/hover-min.css', 1) }}">
-    <!--<link rel="stylesheet" href="{{ pathto('_static/octicons/lib/octicons.css', 1) }}">-->
-    <!--<link rel="stylesheet" href="{{ pathto('_static/primer-markdown/lib/user-content.min.css', 1) }}">-->
-    <link rel="stylesheet" href="{{ pathto('_static/css/syntax.css', 1) }}" type="text/css" />
-
-    <link rel="stylesheet" href="{{ pathto('_static/' + style, 1) }}" type="text/css" />
-    <link rel="stylesheet" href="{{ pathto('_static/pygments.css', 1) }}" type="text/css" />
-    
-    {% for css in css_files %}
-      {% if css|attr("rel") %}
-    <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
-      {% else %}
-    <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
-      {% endif %}
-    {% endfor %}
-
-    {% for css in extra_css_files %}
-      {% if css|attr("rel") %}
-    <link rel="{{ css.rel }}" href="{{ pathto(css.filename, 1) }}" type="text/css"{% if css.title is not none %} title="{{ css.title }}"{% endif %} />
-      {% else %}
-    <link rel="stylesheet" href="{{ pathto(css, 1) }}" type="text/css" />
-      {% endif %}
-    {% endfor %}
-
-    {% if not theme_jumbotron_background_image.startswith('data:') %}
-    <style>
-    .jumbotron.geopattern {
-         background-image: url('{{ pathto(theme_jumbotron_background_image, 1) }}');
-         }
-    </style>
-    {% endif %}
-
-    <script type="text/javascript" src="{{ pathto('_static/js/bootstrap.min.js', 1) }}"></script>
-    
-    {% if theme_font_awesome_embed_code %}
-    <script src="https://use.fontawesome.com/{{ theme_font_awesome_embed_code }}"></script>
-    {% endif %}
-{% endmacro %}
-
-{% macro relbar() %}
-    <div class="related" role="navigation" aria-label="related navigation">
-      <h3>{{ _('Navigation') }}</h3>
-      <ul>
-        {% for rellink in rellinks %}
-        <li class="right" {% if loop.first %}style="margin-right: 10px"{% endif %}>
-          <a href="{{ pathto(rellink[0]) }}" title="{{ rellink[1]|striptags|e }}"
-             {{ accesskey(rellink[2]) }}>{{ rellink[3] }}</a>
-          {% if not loop.first %}{{ reldelim2 }}{% endif %}</li>
-        {% endfor %}
-        {% block rootrellink %}
-        <li class="nav-item nav-item-0"><a href="{{ pathto(master_doc) }}">{{ shorttitle|e }}</a>{{ reldelim1 }}</li>
-        {% endblock %}
-        {% for parent in parents %}
-          <li class="nav-item nav-item-{{ loop.index }}"><a href="{{ parent.link|e }}" {% if loop.last %}{{ accesskey("U") }}{% endif %}>{{ parent.title }}</a>{{ reldelim1 }}</li>
-        {% endfor %}
-        {% block relbaritems %} {% endblock %}
-      </ul>
-    </div>
-{% endmacro %}
-
-{% macro sidebar() %}
-      {% if render_sidebar %}
-      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
-        <div class="sphinxsidebarwrapper">
-          {% block sidebarlogo %}
-          {% if logo %}
-            <p class="logo"><a href="{{ pathto(master_doc) }}">
-              <img class="logo" src="{{ pathto('_static/' + logo, 1) }}" alt="Logo"/>
-            </a></p>
-          {% endif %}
-          {% endblock %}
-          {% if sidebars != None %}
-            {# new style sidebar: explicitly include/exclude templates #}
-            {% for sidebartemplate in sidebars %}
-            {% include sidebartemplate %}
-            {% endfor %}
-          {% else %}
-            {# old style sidebars: using blocks -- should be deprecated #}
-            {% block sidebartoc %}
-            {% include "localtoc.html" %}
-            {% endblock %}
-            {% block sidebarrel %}
-            {% include "relations.html" %}
-            {% endblock %}
-            {% block sidebarsourcelink %}
-            {% include "sourcelink.html" %}
-            {% endblock %}
-            {% if customsidebar %}
-            {% include customsidebar %}
-            {% endif %}
-            {% block sidebarsearch %}
-            {% include "searchbox.html" %}
-            {% endblock %}
-          {% endif %}
-        </div>
-      </div>
-      {%- endif %}
-{% endmacro %}
-
-{%- set url_root = pathto('', 1) %}
-{%- if url_root == '#' %}{% set url_root = '' %}{% endif %}
 
 {% if 'singlehtml' not in builder %}
 {% set global_toc = toctree(maxdepth=theme_toc_depth|int, collapse=theme_toc_collapse, includehidden=theme_toc_hidden) %}
 {% endif %}
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="{{ encoding }}">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="title" content="{{ project }}">
-        <meta name="version" content="{{ version }}">
-        <meta name="copyright" content="{{ copyright }}">
-        
-        {{ metatags }}
-        
-        <!-- Favicon Icon -->
-        {% if favicon %}
-        <link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}"/>
-        {% endif %}
 
-        {% block htmltitle %}
-        <title>{{ title|striptags|e }}{{ titlesuffix }}</title>
-        {% endblock %}
+{% block linktags %}
+{% if not hasdoc('about') and theme_about %}
+<link rel="author" title="{{ _('About these documents') }}" href="{{ theme_about }}"/>
+{% endif %}
+{{ super() }}
+{% endblock %}
 
-        <script type="text/javascript" src="{{ pathto('_static/js/jquery.min.js', 1) }}"></script>
-       
-        {{ css() }}
+{% block extrahead %}
+<meta name="title" content="{{ project }}" />
+<meta name="version" content="{{ version }}" />
+<meta name="copyright" content="{{ copyright }}" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+{% if favicon %} {# Favicon Icon #}
+<link rel="shortcut icon" href="{{ pathto('_static/' + favicon, 1) }}" />
+{% endif %} {% endblock %} {% block header %}
+<header class="site-header">
+  <div class="container">
+    <a id="site-header-brand" href="/" title="{{ project }}">
+      {% if theme_navbar_icon_override_logo|tobool or not logo %}
+      <i class="fa fa-{{ theme_navbar_icon }}" aria-hidden="true"></i>
+      {% else %}
+      <img src="{{ pathto('_static/' + logo, 1) }}" alt="{{ project }}">
+      {% endif %}
+      {{ project }}
+    </a>
+    <nav class="site-header-nav" role="navigation">
+      {% if theme_navs %}
+      {% for name, link in theme_navs.items() %}
+      <a href="{{ link }}" class="{% if pagename == name %} selected {% endif %} site-header-nav-item hvr-underline-from-center" target="_self" title="{{ name }}">
+        {{ name }}
+      </a>
+      {% endfor %}
+      <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center" target="_self" title="{{ project }}">
+        {% if theme_home_name %}{{ theme_home_name }}{% else %}{{ project }}{% endif %}
+      </a>
+      {% else%}
+      <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center" target="_self" title="{{ project }}">
+        {% if theme_home_name %}{{ theme_home_name }}{% else %}{{ project }}{% endif %}
+      </a>
+      {% endif %}
+    </nav>
+  </div>
+</header>
+{% endblock %}
 
-        {% if theme_canonical_url %}
-        <link rel="canonical" href="{{ theme_canonical_url }}{{ pagename }}.html"/>
-        {% endif %}
-        
-        {% block linktags %}
-        {% if hasdoc('about') %}
-        <!-- About Linktag -->
-        <link rel="author" title="{{ _('About these documents') }}" href="{{ pathto('about') }}" />
-        {% elif theme_about %}
-        <!-- About Linktag -->
-        <link rel="author" title="{{ _('About these documents') }}" href="{{ theme_about }}" />
-        {% endif %}
-        {% if hasdoc('genindex') %}
-        <!-- Genindex Linktag -->
-        <link rel="index" title="{{ _('Index') }}" href="{{ pathto('genindex') }}" />
-        {% endif %}
-        {% if hasdoc('search') %}
-        <!-- Search Linktag -->
-        <link rel="search" title="{{ _('Search') }}" href="{{ pathto('search') }}" />
-        {% endif %}
-        {% if hasdoc('copyright') %}
-        <!-- Copyright Linktag -->
-        <link rel="copyright" title="{{ _('Copyright') }}" href="{{ pathto('copyright') }}" />
-        {% endif %}
-        {% if next %}
-        <!-- Next Linktag -->
-        <link rel="next" title="{{ next.title|striptags|e }}" href="{{ next.link|e }}" />
-        {% endif %}
-        {% if prev %}
-        <!-- Previous Linktag -->
-        <link rel="prev" title="{{ prev.title|striptags|e }}" href="{{ prev.link|e }}" />
-        {% endif %}
-        {% endblock %}
-        
-        {% block extrahead %}{% endblock %}
-    </head>
-    <body>
-        {% block header %}
-        <header class="site-header">
-            <div class="container">
-                <a id="site-header-brand" href="/" title="{{ project }}">
-                    <i class="fa fa-{{ theme_navbar_icon }}" aria-hidden="true"></i> {{ project }}
-                </a>
-                <nav class="site-header-nav" role="navigation">
-                {% if theme_navs %}
-                {% for name, link in theme_navs.items() %}
-                    <a href="{{ link }}" class="{% if pagename == name %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
-               target="_self"
-               title="{{ name }}">
-                        {{ name }}
-                    </a>
-                {% endfor %}
-                    <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
-               target="_self"
-               title="{{ project }}">
-                        {% if theme_home_name %}{{ theme_home_name }}{% else %}{{ project }}{% endif %}
-                    </a>
-                {% else%}
-                    <a href="{{ pathto(master_doc) }}" class="{% if pagename == project %} selected {% endif %} site-header-nav-item hvr-underline-from-center"
-               target="_self"
-               title="{{ project }}">
-                        {% if theme_home_name %}{{ theme_home_name }}{% else %}{{ project }}{% endif %}
-                    </a>
-                {% endif %}
-                </nav>
-            </div>
-        </header>
-        {% endblock %}
-        <section class="jumbotron geopattern" data-pattern-id="{{ pagename }}">
-            <div class="container">
-                <div id="jumbotron-meta-info">
-                    <h1>{{ title }}</h1>
-                    <span class="meta-info">
-                        {# % if page.subtitle % #}
-                        {# { page.subtitle } #}
-                        {# % endif % #}
-                        {# % if page.date % #}
-                        {# <i class="fa fa-calendar" aria-hidden="true"></i> {# { page.date | date: "%Y/%m/%d" } #}
-                        {# % endif % #}
-                    </span>
-                </div>
-            </div>
-        </section>
-        {% block content %}
-        <article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
-            <div class="row">
-                <div class="col-md-8 markdown-body">
-                    {% block body %}{% endblock %}
-                    <!-- Comments -->
-                    {% include "disqus-comments.html" %}
-                </div>
-                <div class="col-md-4 toc">
-                    <h3>Table Of Contents</h3>
-                    <div id="toc">
-                        {% if global_toc %}
-                        {{ global_toc }}
-                        {% else %}
-                        {{ toc }}
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-        </article>
-        {% endblock %}
-        {% block footer %}
-        <footer class="container">
-            <div class="site-footer">
-                <div class="copyright pull-left">
-                    {% if hasdoc('copyright') %}
-                    {% trans path=pathto('copyright'), copyright=copyright|e %}&#169; <a href="{{ path }}"> Copyright</a> {{ copyright }}.{% endtrans %}
-                    {% else %}
-                    {% trans copyright=copyright|e %}&#169; Copyright {{ copyright }}.{% endtrans %}
-                    {% endif %}
-                </div>
-                <div class="source_code">
-                    {% if theme_github_url %}
-                    <a href="https://github.com/{{ theme_github_url }}" target="_blank" aria-label="view source code">
-                        <i class="fa fa-github" title="GitHub"></i>
-                    </a>
-                    {% elif theme_bitbucket_url %}
-                    <a href="https://bitbucket.com/{{ theme_bitbucket_url }}" target="_blank" aria-label="view source code">
-                        <i class="fa fa-bitbucket" title="BitBucket" aria-hidden="true"></i>
-                    </a>
-                    {% elif theme_gitlab_url %}
-                    <a href="https://gitlab/{{ theme_gitlab_url }}" target="_blank" aria-label="view source code">
-                        <i class="fa fa-gitlab" title="GitLab" aria-hidden="true"></i>
-                    </a>
-                    {% else %}
-                    <a href="javascript:window.scrollTo(20,20)">
-                        <i class="fa fa-arrow-up" title="To The Top" aria-hidden="true"></i>
-                    </a>
-                    {% endif %}
-                </div>
-                {% if show_sphinx %}
-                <div class="sphinx pull-right">
-                    {% trans sphinx_version=sphinx_version|e %}
-                    Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}
-                    {% endtrans %}
-                </div>
-                {% endif %}
-            </div>
-            {% if theme_google_tracking_id %}
-            <!-- Google Analytics -->
-            <div style="display:none">
-                <script>
-                    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+{% block relbar1 %}{# Disable relbar1 #}{% endblock %}
 
-                    ga('create', '{{ theme_google_tracking_id }}', 'auto');
-                    ga('send', 'pageview');
-                </script>
-            </div>
-            {% endif %}
-        </footer>
-        {% endblock %}
-        {% block scripts %}
-        {{ script() }}
-        {% endblock %}
-    </body>
-</html>
+{% block content %}
+<section class="jumbotron{% if theme_jumbotron_use_geopattern|tobool() %} geopattern{% endif %}" data-pattern-id="{{ pagename }}">
+  <div class="container">
+    <div id="jumbotron-meta-info">
+      <h1>{{ title }}</h1>
+      <span class="meta-info">
+        {# % if page.subtitle % #} {# { page.subtitle } #} {# % endif % #} {# %
+        if page.date % #} {#
+        <i class="fa fa-calendar" aria-hidden="true"></i> {# { page.date | date:
+        "%Y/%m/%d" } #} {# % endif % #}
+      </span>
+    </div>
+  </div>
+</section>
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="row">
+    <div class="col-md-8 markdown-body">
+      {% block body %}{% endblock %}
+      <!-- Comments -->
+      {% include "disqus-comments.html" %}
+    </div>
+    <div class="col-md-4 toc">
+      <h3>Table Of Contents</h3>
+      <div id="toc">
+        {% if global_toc %} {{ global_toc }} {% else %} {{ toc }} {% endif %}
+      </div>
+    </div>
+  </div>
+</article>
+{% endblock %}
+
+{% block relbar2 %}{# Disable relbar2 #}{% endblock %}
+
+{% block footer %}
+<footer class="container">
+  <div class="site-footer">
+    <div class="copyright float-left">
+      {% if hasdoc('copyright') %}
+      {% trans path=pathto('copyright'), copyright=copyright|e %}
+      &#169; <a href="{{ path }}"> Copyright</a> {{ copyright }}.
+      {% endtrans %}
+      {% else %}
+      {% trans copyright=copyright|e %}
+      &#169; Copyright {{ copyright }}.
+      {% endtrans %}
+      {% endif %}
+    </div>
+    <div class="source_code">
+      {% if theme_service and theme_user and theme_repo %}
+      <a href="https://{{ theme_service }}.com/{{ theme_user }}/{{theme_repo}}" target="_blank" aria-label="view source code">
+        <i class="fab fa-{{ theme_service|lower() }}" title="{{ theme_service }}" aria-hidden="true"></i>
+      </a>
+      {% else %}
+      <a href="javascript:window.scrollTo(20,20)">
+        <i class="fa fa-arrow-up" title="To The Top" aria-hidden="true"></i>
+      </a>
+      {% endif %}
+    </div>
+    {% if show_sphinx %}
+    <div class="sphinx float-right">
+      {% trans sphinx_version=sphinx_version|e %}
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}
+      {% endtrans %}
+    </div>
+    {% endif %}
+  </div>
+</footer>
+{% if not embedded %}
+{# Load scripts after everything else #}
+{{ scripts() }}
+{% if theme_google_tracking_id %}
+<!-- Google Analytics -->
+<div style="display:none">
+  <script>
+    (function(i, s, o, g, r, a, m) {
+      i["GoogleAnalyticsObject"] = r;
+      (i[r] =
+        i[r] ||
+        function() {
+          (i[r].q = i[r].q || []).push(arguments);
+        }),
+        (i[r].l = 1 * new Date());
+      (a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]);
+      a.async = 1;
+      a.src = g;
+      m.parentNode.insertBefore(a, m);
+    })(
+      window,
+      document,
+      "script",
+      "https://www.google-analytics.com/analytics.js",
+      "ga"
+    );
+
+    ga("create", "{{ theme_google_tracking_id }}", "auto");
+    ga("send", "pageview");
+  </script>
+</div>
+{% endif %}
+{% endif %}
+{% endblock %}

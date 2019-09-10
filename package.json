@@ -3,7 +3,7 @@
   "main": "src/index.js",
   "private": true,
   "scripts": {
-    "prettier": "prettier --write webpack.*.js src/**/* yummy_sphinx_theme/*.html",
+    "prettier": "prettier --write webpack.*.js src/**/*",
     "dev": "webpack --config webpack.development.js",
     "build": "webpack --config webpack.production.js"
   },
