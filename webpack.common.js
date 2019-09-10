@@ -19,11 +19,17 @@ module.exports = {
   externals: {
     jquery: "jQuery"
   },
+  node: { Buffer: false },
   module: {
     rules: [
-      {
+      /*{
         test: require.resolve("./src/index.js"),
         use: "imports-loader"
+      },*/
+      {
+        test: /\.js?$/,
+        exclude: /node_modules/,
+        use: "babel-loader"
       },
       {
         test: /\.s[ac]ss$/i,

@@ -1,3 +1,4 @@
+var GeoPattern = require("geopattern");
 var fixmeTop = $("#toc").offset().top - 100;
 
 // Window Scroll
@@ -49,4 +50,10 @@ $(document).ready(function() {
 
   // Update all headerlinks to fontawesome icons
   $("a.headerlink").html('<i class="fas fa-bookmark"></i>');
+
+  $(".geopattern").each(function() {
+    var pattern = GeoPattern.generate($(this).data("pattern-id"));
+    $(this).css("background-image", pattern.toDataUrl());
+    //$(this).geopattern($(this).data('pattern-id'));
+  });
 });
