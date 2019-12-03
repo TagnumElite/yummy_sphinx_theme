@@ -12,7 +12,7 @@
     "@fortawesome/fontawesome-free": "^5.11.2",
     "babel-loader": "^8.0.6",
     "bootstrap": "^4.4.1",
-    "css-loader": "^3.2.0",
+    "css-loader": "^3.2.1",
     "file-loader": "^5.0.2",
     "flag-icon-css": "^3.4.5",
     "font-awesome": "^4.7.0",
