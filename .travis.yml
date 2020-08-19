@@ -4,7 +4,7 @@ sudo: true
 python:
   - 3.6
 node_js:
-  - node
+  - 10
 
 cache:
   - npm
